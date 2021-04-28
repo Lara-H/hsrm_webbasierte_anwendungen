@@ -6,7 +6,7 @@ package de.hsrm.mi.web.projekt.login;
 
 public class User {
     private String username;
-    private String passwort;
+	private String password;
 
 	public String getUsername() {
 		return this.username;
@@ -16,12 +16,13 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPasswort() {
-		return this.passwort;
+
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setPasswort(String passwort) {
-		this.passwort = passwort;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
