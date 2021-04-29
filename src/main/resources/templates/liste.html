@@ -9,21 +9,27 @@
       <table>
         <thead>
           <tr>
+            <td>ID</td>
             <td>Datum</td>
             <td>Name</td>
             <td>Ort</td>
             <td>Beschreibung</td>
+            <td>Bearbeiten</td>
+            <td>Löschen</td>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="sichtung : ${listSichtungen}">
+          <tr th:each="sichtung : ${meinesichtungen}">
+            <td th:text="${sichtung.getId()}">ID</td>
             <td th:text="${sichtung.getDatum()}">Datum</td>
             <td th:text="${sichtung.getName()}">Name</td>
             <td th:text="${sichtung.getOrt()}">Ort</td>
             <td th:text="${sichtung.getBeschreibung()}">Beschreibung</td>
+            
           </tr>
         </tbody>
       </table>
+      <a href="/sichtung/meine/neu">Neue Sichtung anlegen</a>
     </div>
   </body>
 </html>

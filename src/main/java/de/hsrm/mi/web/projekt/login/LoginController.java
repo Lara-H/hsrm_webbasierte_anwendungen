@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class LoginController {
 
     /**
-     * Bei Seitenaufruf Formular laden
+     * Bei Seitenaufruf Login laden
      */
     @GetMapping("/login")
     public String showForm(Model m) {
@@ -22,7 +22,7 @@ public class LoginController {
     }
 
     /**
-     * Nach Absenden des Formulares sucess-Template laden
+     * Nach Absenden des Login
      */
     @PostMapping("/login")
     public String submitForm(@ModelAttribute("user") User user, Model m) {

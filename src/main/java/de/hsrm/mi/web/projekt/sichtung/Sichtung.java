@@ -1,11 +1,20 @@
 package de.hsrm.mi.web.projekt.sichtung;
+
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Sichtung {
-    String name;
-    String ort;
-    LocalDate datum = LocalDate.now();
-    String beschreibung;
+    private String name;
+    private String ort;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate datum;
+    private String beschreibung;
+    private int id;
+
+    public Sichtung() {
+        
+    }
 
     public Sichtung(String name, String ort, String beschreibung) {
         this.name = name;
@@ -44,6 +53,15 @@ public class Sichtung {
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
     }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public String toString() {
         return "Name: " + this.getName() + ", Ort: " + this.getOrt() + ", Datum: " + this.getDatum() + ", Beschreibung: " + this.getBeschreibung();

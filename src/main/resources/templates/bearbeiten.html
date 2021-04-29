@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Login</title>
+  </head>
+  <body>
+    <div align="center">
+      <h1>Bearbeiten</h1>
+      <form action="#" th:action="@{/sichtung/meine/neu}" th:object="${meinesichtungform}" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" th:field="*{name}"><br>
+        <label for="ort">Ort</label>
+        <input type="text" id="ort" th:field="*{ort}"><br>
+        <label for="beschreibung">Beschreibung</label>
+        <input type="text" id="beschreibung" th:field="*{beschreibung}"><br>
+        <label for="datum">Datum</label>
+        <input type="date" id="datum" th:field="*{{datum}}"><br>
+        <button type="submit">Speichern</button>
+      </form>
+    </div>
+  </body>
+</html>
