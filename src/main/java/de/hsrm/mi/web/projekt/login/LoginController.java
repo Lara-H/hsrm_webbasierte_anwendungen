@@ -34,7 +34,7 @@ public class LoginController {
                 return "login_success"; // Folgeseite
             } else {
                 m.addAttribute("loggedinusername", ""); // Leeren String in SessionAttribut-Liste speichern
-                m.addAttribute("hilfe", "Hinweis: Das korrekte Passwort für " + user.getUsername() + " ist " + correctPassword + ".");
+                m.addAttribute("wrongPassword", "Falsches Passwort! Das korrekte Passwort für " + user.getUsername() + " ist " + correctPassword + ".");
     
             }
         } 
