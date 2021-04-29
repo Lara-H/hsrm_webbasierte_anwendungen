@@ -1,10 +1,17 @@
 package de.hsrm.mi.web.projekt.sichtung;
+import java.time.LocalDate;
 
 public class Sichtung {
     String name;
     String ort;
-    java.time.LocalDate datum;
+    LocalDate datum = LocalDate.now();
     String beschreibung;
+
+    public Sichtung(String name, String ort, String beschreibung) {
+        this.name = name;
+        this.ort = ort;
+        this.beschreibung = beschreibung;
+    }
 
     public String getName() {
         return this.name;

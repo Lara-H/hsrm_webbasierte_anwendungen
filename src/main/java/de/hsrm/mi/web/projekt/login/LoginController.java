@@ -15,9 +15,9 @@ public class LoginController {
      * Bei Seitenaufruf Formular laden
      */
     @GetMapping("/login")
-    public String showForm(Model model) {
+    public String showForm(Model m) {
         User user = new User(); // Neuen Benutzer anlegen
-        model.addAttribute("user", user);
+        m.addAttribute("user", user);
         return "login";
     }
 
@@ -31,7 +31,7 @@ public class LoginController {
             String correctPassword = user.getUsername() + user.getUsername().length(); // Korrektes Passwort
             if (user.getPassword().equals(correctPassword)) { // Wenn Passwort richtig
                 m.addAttribute("loggedinusername", user.getUsername()); // In SessionAttribut-Liste speichern
-                return "login_success"; // Folgeseite
+                return "/sichtung/meine"; // Folgeseite
             } else {
                 m.addAttribute("loggedinusername", ""); // Leeren String in SessionAttribut-Liste speichern
                 m.addAttribute("wrongPassword", "Falsches Passwort! Das korrekte Passwort für " + user.getUsername() + " ist " + correctPassword + ".");
