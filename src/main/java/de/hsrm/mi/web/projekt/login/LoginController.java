@@ -33,12 +33,13 @@ public class LoginController {
             logger.info("Richtiges Passwort = {}", correctPassword);
             if (user.getPassword().equals(correctPassword)) { // Wenn Passwort richtig
                 m.addAttribute("loggedinusername", user.getUsername()); // In SessionAttribut-Liste speichern
+                return "redirect:/sichtung/meine";
             } else {
                 m.addAttribute("loggedinusername", ""); // Leeren String in SessionAttribut-Liste speichern
                 m.addAttribute("wrongPassword", "Falsches Passwort! Das korrekte Passwort für " + user.getUsername() + " ist " + correctPassword + ".");
-                return "login";
             }
         } 
-        return "redirect:/sichtung/meine";
+        return "login";
+        
     }
 }

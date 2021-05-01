@@ -24,7 +24,7 @@ public class SichtungController {
 
     @GetMapping("/sichtung/meine")
     public String showSichtungen(Model m) {
-        //initListe(m);
+        // initListe(m);
         m.addAttribute("meinesichtungen", listSichtungen);
         return "liste";
     }
@@ -38,24 +38,39 @@ public class SichtungController {
 
     @PostMapping("/sichtung/meine/neu")
     public RedirectView submitForm(@ModelAttribute("minesichtungen") Sichtung sichtung, Model m) {
-        sichtung.setId(idCount);
-        listSichtungen.add(sichtung);
-        m.addAttribute("meinesichtungform", listSichtungen);
-        idCount++;
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("/sichtung/meine");
-        return redirectView;   
+        logger.info("Name = {}", sichtung.getName());
+        if (sichtung.getName() != "") {
+            sichtung.setId(idCount);
+            listSichtungen.add(sichtung);
+            m.addAttribute("meinesichtungform", listSichtungen);
+            idCount++;
+            redirectView.setUrl("/sichtung/meine");
+        } else {
+            m.addAttribute("emptyEntry", "Bitte geben Sie einen Namen ein.");
+            redirectView.setUrl("/sichtung/meine/neu");
+        }
+        return redirectView;
+    }
+
+    @GetMapping("/sichtung/meine/{id}/del")
+    public String delete() {
+        logger.info("Element gelöscht");
+        return "delete";
+    }
+
+    @GetMapping("/sichtung/meine/{id}")
+    public String edit() {
+        return "edit";
     }
 
     // public void initListe(Model m) {
-    //     Sichtung ersteSichtung = new Sichtung("Name1", "Wiesbaden", "Beschreibung1");
-    //     Sichtung zweiteSichtung = new Sichtung("Name2", "Mainz", "Beschreibung2");
-    //     Sichtung dritteSichtung = new Sichtung("Name3", "Berlin", "Beschreibung3");
-    //     listSichtungen.add(ersteSichtung);
-    //     listSichtungen.add(zweiteSichtung);
-    //     listSichtungen.add(dritteSichtung); 
+    // Sichtung ersteSichtung = new Sichtung("Name1", "Wiesbaden", "Beschreibung1");
+    // Sichtung zweiteSichtung = new Sichtung("Name2", "Mainz", "Beschreibung2");
+    // Sichtung dritteSichtung = new Sichtung("Name3", "Berlin", "Beschreibung3");
+    // listSichtungen.add(ersteSichtung);
+    // listSichtungen.add(zweiteSichtung);
+    // listSichtungen.add(dritteSichtung);
     // }
-
-
 
 }
