@@ -1,8 +1,8 @@
-package de.hsrm.mi.web.projekt.login;
-
 /**
  * Benutzer des Systems
  */
+
+package de.hsrm.mi.web.projekt.login;
 
 public class User {
     private String username;

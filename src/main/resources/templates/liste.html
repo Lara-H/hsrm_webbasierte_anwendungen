@@ -25,7 +25,8 @@
             <td th:text="${sichtung.getName()}">Name</td>
             <td th:text="${sichtung.getOrt()}">Ort</td>
             <td th:text="${sichtung.getBeschreibung()}">Beschreibung</td>
-            
+            <td><a th:href="@{/sichtung/meine/{id}(id=${sichtung.getId()})}">Bearbeiten</a></td>
+            <td><a th:href="@{/sichtung/meine/{id}(id=${sichtung.getId()})}">Löschen</a></td>
           </tr>
         </tbody>
       </table>

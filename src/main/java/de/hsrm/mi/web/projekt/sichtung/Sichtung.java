@@ -1,7 +1,10 @@
+/**
+ * Einzelne Sichtung
+ */
+
 package de.hsrm.mi.web.projekt.sichtung;
 
 import java.time.LocalDate;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Sichtung {
@@ -11,16 +14,6 @@ public class Sichtung {
     private LocalDate datum;
     private String beschreibung;
     private int id;
-
-    public Sichtung() {
-        
-    }
-
-    public Sichtung(String name, String ort, String beschreibung) {
-        this.name = name;
-        this.ort = ort;
-        this.beschreibung = beschreibung;
-    }
 
     public String getName() {
         return this.name;
@@ -62,11 +55,7 @@ public class Sichtung {
         this.id = id;
     }
 
-
     public String toString() {
         return "Name: " + this.getName() + ", Ort: " + this.getOrt() + ", Datum: " + this.getDatum() + ", Beschreibung: " + this.getBeschreibung();
     }
-
-
-    
 }
