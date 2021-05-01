@@ -2,18 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>Login</title>
+    <link rel="stylesheet" href="main.css" />
   </head>
-  <body>
-    <div align="center">
-      <h1>Login</h1>
-      <span th:text="${wrongPassword}"></span>
-      <form action="#" th:action="@{/login}" th:object="${user}" method="post">
-        <label for="username">Benutzername</label>
-        <input type="text" id="username" th:field="*{username}"><br>
-        <label for="password">Passwort</label>
-        <input type="text" id="password" th:field="*{password}"><br>
-        <button type="submit">Einloggen</button>
-      </form>
-    </div>
+  <body id="login">
+    <h1 class="header">Login</h1>
+    <p>Bitte melden Sie sich an</p>
+    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+      <label for="username">Benutzername</label>
+      <input type="text" id="username" th:field="*{username}" /><br />
+      <label for="password">Passwort</label>
+      <input type="text" id="password" th:field="*{password}" /><br />
+      <button class="btn" type="submit">Einloggen</button>
+    </form>
+    <p class="infoText" th:text="${wrongPassword}"></p>
   </body>
 </html>

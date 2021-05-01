@@ -1,36 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Login</title>
+    <title>Meine Sichtungen</title>
+    <link rel="stylesheet" href="main.css" th:href="@{/main.css}" />
   </head>
-  <body>
-    <div align="center">
-      <h1>Sichtungen</h1>
+  <body id="liste">
+    <div class="header">
       <table>
-        <thead>
-          <tr>
-            <td>ID</td>
-            <td>Datum</td>
-            <td>Name</td>
-            <td>Ort</td>
-            <td>Beschreibung</td>
-            <td>Bearbeiten</td>
-            <td>Löschen</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="sichtung : ${meinesichtungen}">
-            <td th:text="${sichtung.getId()}">ID</td>
-            <td th:text="${sichtung.getDatum()}">Datum</td>
-            <td th:text="${sichtung.getName()}">Name</td>
-            <td th:text="${sichtung.getOrt()}">Ort</td>
-            <td th:text="${sichtung.getBeschreibung()}">Beschreibung</td>
-            <td><a th:href="@{/sichtung/meine/{id}(id=${sichtung.getId()})}">Bearbeiten</a></td>
-            <td><a th:href="@{/sichtung/meine/{id}(id=${sichtung.getId()})}">Löschen</a></td>
-          </tr>
-        </tbody>
+        <tr>
+          <td>
+            <h1>Meine Sichtungen</h1>
+          </td>
+          <td>
+            <a class="btn" href="/sichtung/meine/neu">Neue Sichtung anlegen</a>
+          </td>
+        </tr>
       </table>
-      <a href="/sichtung/meine/neu">Neue Sichtung anlegen</a>
     </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Datum</td>
+          <td>Name</td>
+          <td>Ort</td>
+          <td>Beschreibung</td>
+          <td>Bearbeiten</td>
+          <td>Löschen</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="sichtung : ${meinesichtungen}">
+          <td th:text="${sichtung.getId()}">ID</td>
+          <td th:text="${sichtung.getDatum()}">Datum</td>
+          <td th:text="${sichtung.getName()}">Name</td>
+          <td th:text="${sichtung.getOrt()}">Ort</td>
+          <td th:text="${sichtung.getBeschreibung()}">Beschreibung</td>
+          <td>
+            <a th:href="@{/sichtung/meine/{id}(id=${sichtung.getId()})}"
+              >Bearbeiten</a
+            >
+          </td>
+          <td>
+            <a th:href="@{/sichtung/meine/{id}(id=${sichtung.getId()})}"
+              >Löschen</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
