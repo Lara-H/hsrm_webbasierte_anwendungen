@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 @SessionAttributes(names = { "meinesichtungen" })
 public class SichtungController {
+    Logger logger = LoggerFactory.getLogger(SichtungController.class);
     ArrayList<Sichtung> listSichtungen = new ArrayList<Sichtung>();
     int idCount = 1;
 
