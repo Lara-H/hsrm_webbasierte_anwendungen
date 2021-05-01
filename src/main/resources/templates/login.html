@@ -11,7 +11,7 @@
       <label for="username">Benutzername</label>
       <input type="text" id="username" th:field="*{username}" /><br />
       <label for="password">Passwort</label>
-      <input type="text" id="password" th:field="*{password}" /><br />
+      <input type="password" id="password" th:field="*{password}" /><br />
       <button class="btn" type="submit">Einloggen</button>
     </form>
     <p class="infoText" th:text="${wrongPassword}"></p>
