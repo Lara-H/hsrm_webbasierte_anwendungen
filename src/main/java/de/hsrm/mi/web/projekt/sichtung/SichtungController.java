@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -54,9 +55,21 @@ public class SichtungController {
     }
 
     @GetMapping("/sichtung/meine/{id}/del")
-    public String delete() {
+    public String delete(Model m, @PathVariable int id) {
         logger.info("Element gelöscht");
+        for (Sichtung sichtung : listSichtungen) {
+            if (sichtung.getId() == id) {
+                listSichtungen.remove(sichtung);
+                break;
+            }
+        }
+        m.addAttribute("meinesichtungform", listSichtungen);
         return "delete";
+    }
+
+    @PostMapping("/sichtung/meine/{id}/del")
+    public void delete() {
+        logger.info("Element hoffentlich gelöscht");
     }
 
     @GetMapping("/sichtung/meine/{id}")
