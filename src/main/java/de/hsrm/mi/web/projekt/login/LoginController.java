@@ -27,7 +27,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public String submitForm(@ModelAttribute("user") User user, Model m) {
-        System.out.println(user);
         if (user.getUsername() != "") { // Wenn Username nicht leer
             String correctPassword = user.getUsername() + user.getUsername().length(); // Korrektes Passwort
             logger.info("Richtiges Passwort = {}", correctPassword);
@@ -39,7 +38,6 @@ public class LoginController {
                 m.addAttribute("wrongPassword", "Falsches Passwort! Das korrekte Passwort für " + user.getUsername() + " ist " + correctPassword + ".");
             }
         } 
-        return "login";
-        
+        return "login"; 
     }
 }

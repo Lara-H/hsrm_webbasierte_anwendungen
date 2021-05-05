@@ -13,7 +13,17 @@ public class Sichtung {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate datum;
     private String beschreibung;
-    private int id;
+
+    public Sichtung() {
+    }
+
+    // Erste Einträge zum Testen
+    public Sichtung(String name, String ort, String beschreibung) {
+        this.name = name;
+        this.ort = ort;
+        this.beschreibung = beschreibung;
+        setDatum(LocalDate.now());
+    }
 
     public String getName() {
         return this.name;
@@ -45,14 +55,6 @@ public class Sichtung {
 
     public void setBeschreibung(String beschreibung) {
         this.beschreibung = beschreibung;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String toString() {

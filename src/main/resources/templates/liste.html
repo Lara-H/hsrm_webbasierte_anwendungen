@@ -20,7 +20,6 @@
     <table class="table">
       <thead>
         <tr>
-          <td>ID</td>
           <td>Datum</td>
           <td>Name</td>
           <td>Ort</td>
@@ -30,20 +29,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="sichtung : ${meinesichtungen}">
-          <td th:text="${sichtung.getId()}">ID</td>
+        <tr th:each="sichtung, nr : ${meinesichtungen}">
           <td th:text="${sichtung.getDatum()}">Datum</td>
           <td th:text="${sichtung.getName()}">Name</td>
           <td th:text="${sichtung.getOrt()}">Ort</td>
           <td th:text="${sichtung.getBeschreibung()}">Beschreibung</td>
           <td>
-            <a th:href="@{/sichtung/meine/{id}(id=${sichtung.getId()})}"
+            <a th:href="@{'/sichtung/meine/'+${nr.index}}"
               >Bearbeiten</a
             >
           </td>
           <td>
-            <a th:href="@{/sichtung/meine/{id}(id=${sichtung.getId()})}"
-              >Löschen</a
+            <a th:href="@{'/sichtung/meine/'+${nr.index}}+'/del'">Löschen</a
             >
           </td>
         </tr>

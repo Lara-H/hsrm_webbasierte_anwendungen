@@ -5,6 +5,8 @@
 package de.hsrm.mi.web.projekt.sichtung;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,70 +21,52 @@ import org.slf4j.LoggerFactory;
 @SessionAttributes(names = { "meinesichtungen" })
 public class SichtungController {
     Logger logger = LoggerFactory.getLogger(SichtungController.class);
-    ArrayList<Sichtung> listSichtungen = new ArrayList<Sichtung>();
-    int idCount = 1;
+
+    // Wird automatisch aufgerufen zum Anlegen der Liste
+    @ModelAttribute("meinesichtungen")
+    public void initListe(Model m) {
+        List<Sichtung> listSichtungen = new ArrayList<Sichtung>();
+        listSichtungen.add(new Sichtung("Erste Sichtung", "Wiesbaden", "Erste Beschreibung"));
+        listSichtungen.add(new Sichtung("Zweite Sichtung", "Mainz", "Zweite Beschreibung"));
+        listSichtungen.add(new Sichtung("Dritte Sichtung", "Frankfurt", "Dritte Beschreibung"));
+        m.addAttribute("meinesichtungen", listSichtungen);
+    }
 
     @GetMapping("/sichtung/meine")
     public String showSichtungen(Model m) {
-        // initListe(m);
-        m.addAttribute("meinesichtungen", listSichtungen);
         return "liste";
     }
 
     @GetMapping("/sichtung/meine/neu")
     public String newSichtung(Model m) {
-        Sichtung sichtung = new Sichtung();
-        m.addAttribute("meinesichtungform", sichtung);
+        m.addAttribute("meinesichtungform", new Sichtung());
         return "bearbeiten";
     }
 
     @PostMapping("/sichtung/meine/neu")
-    public RedirectView submitForm(@ModelAttribute("minesichtungen") Sichtung sichtung, Model m) {
-        RedirectView redirectView = new RedirectView();
-        logger.info("Name = {}", sichtung.getName());
+    public String submitForm(Model m, @ModelAttribute("meinesichtungform")Sichtung sichtung, @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
         if (sichtung.getName() != "") {
-            sichtung.setId(idCount);
             listSichtungen.add(sichtung);
             m.addAttribute("meinesichtungform", listSichtungen);
-            idCount++;
-            redirectView.setUrl("/sichtung/meine");
+            return "redirect:/sichtung/meine";
         } else {
             m.addAttribute("emptyEntry", "Bitte geben Sie einen Namen ein.");
-            redirectView.setUrl("/sichtung/meine/neu");
         }
-        return redirectView;
+        return "redirect:/sichtung/meine/neu";
     }
 
-    @GetMapping("/sichtung/meine/{id}/del")
-    public String delete(Model m, @PathVariable int id) {
+    @GetMapping("/sichtung/meine/{nr}/del")
+    public String delete(Model m, @PathVariable int nr, @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
         logger.info("Element gelöscht");
-        for (Sichtung sichtung : listSichtungen) {
-            if (sichtung.getId() == id) {
-                listSichtungen.remove(sichtung);
-                break;
-            }
-        }
-        m.addAttribute("meinesichtungform", listSichtungen);
-        return "delete";
+        listSichtungen.remove(nr);
+        return "redirect:/sichtung/meine";
     }
 
-    @PostMapping("/sichtung/meine/{id}/del")
-    public void delete() {
-        logger.info("Element hoffentlich gelöscht");
+    @GetMapping("/sichtung/meine/{nr}")
+    public String edit(Model m, @PathVariable int nr, @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
+        m.addAttribute("meinesichtungform", listSichtungen.get(nr));
+        listSichtungen.remove(nr);
+        return "bearbeiten";
     }
-
-    @GetMapping("/sichtung/meine/{id}")
-    public String edit() {
-        return "edit";
-    }
-
-    // public void initListe(Model m) {
-    // Sichtung ersteSichtung = new Sichtung("Name1", "Wiesbaden", "Beschreibung1");
-    // Sichtung zweiteSichtung = new Sichtung("Name2", "Mainz", "Beschreibung2");
-    // Sichtung dritteSichtung = new Sichtung("Name3", "Berlin", "Beschreibung3");
-    // listSichtungen.add(ersteSichtung);
-    // listSichtungen.add(zweiteSichtung);
-    // listSichtungen.add(dritteSichtung);
-    // }
 
 }

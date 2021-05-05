@@ -13,13 +13,13 @@
       method="post"
     >
       <label for="name">Name</label>
-      <input type="text" id="name" th:field="*{name}" /><br />
+      <input type="text" id="name" th:field="*{name}" value="gfd" placeholder="Name" /><br />
       <label for="ort">Ort</label>
-      <input type="text" id="ort" th:field="*{ort}" /><br />
+      <input type="text" id="ort" th:field="*{ort}" placeholder="Ort" /><br />
       <label for="beschreibung">Beschreibung</label>
-      <input type="text" id="beschreibung" th:field="*{beschreibung}" /><br />
+      <input type="text" id="beschreibung" th:field="*{beschreibung}" placeholder="Beschreibung" /><br />
       <label for="datum">Datum</label>
-      <input type="date" id="datum" th:field="*{{datum}}" /><br />
+      <input type="date" id="datum" th:field="*{datum}" /><br />
       <button class="btn" type="submit">Speichern</button>
     </form>
     <p class="infoText" th:text="${emptyEntry}"></p>
