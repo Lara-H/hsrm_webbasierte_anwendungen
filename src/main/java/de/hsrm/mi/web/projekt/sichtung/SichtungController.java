@@ -6,9 +6,6 @@ package de.hsrm.mi.web.projekt.sichtung;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -36,20 +33,6 @@ public class SichtungController {
         listSichtungen.add(new Sichtung("Dritte Sichtung", "Frankfurt", "Dritte Beschreibung"));
         m.addAttribute("meinesichtungen", listSichtungen);
     }
-
-
-@GetMapping("/")
-public String viewHomePage(Model m, HttpServletRequest request) {
-    m.addAttribute("pageTitle", "Test");
-    Locale currentLocale = request.getLocale();
-    String countryCode = currentLocale.getCountry();
-    String countryName = currentLocale.getDisplayCountry();
-    String langCode = currentLocale.getLanguage();
-    String langName = currentLocale.getDisplayLanguage();
-    System.out.println(countryCode + ": " + countryName);
-    System.out.println(langCode + ": " + langName);
-    return "bearbeiten";
-}
 
     @GetMapping("/sichtung/meine")
     public String showSichtungen(Model m) {

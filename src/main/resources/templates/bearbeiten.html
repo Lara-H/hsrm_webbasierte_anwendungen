@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Sichtung</title>
+    <title th:text="#{bearbeiten.headline}"></title>
     <link rel="stylesheet" href="main.css" th:href="@{/main.css}" />
   </head>
   <body>
-    <h1 class="header">Bitte berichten Sie von Ihrer Sichtung</h1>
+    <h1 class="header" th:text="#{bearbeiten.headline}"></h1>
     <form
       action="#"
       th:action="@{/sichtung/meine/neu}"
       th:object="${meinesichtungform}"
       method="post"
     >
-      <label for="name" th:text="#{form.name}">Name</label>
-      <input type="text" id="name" th:field="*{name}" th:errorclass="error" placeholder="Name" /><br />
+      <label for="name" th:text="#{form.name}"></label>
+      <input type="text" id="name" th:field="*{name}" th:errorclass="error"/><br />
       <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="infoText"></p>
-      <label for="ort" th:text="#{form.ort}">Ort</label>
-      <input type="text" id="ort" th:field="*{ort}" th:errorclass="error" placeholder="Ort" /><br />
+      <label for="ort" th:text="#{form.ort}"></label>
+      <input type="text" id="ort" th:field="*{ort}" th:errorclass="error"/><br />
       <p th:if="${#fields.hasErrors('ort')}" th:errors="*{ort}" class="infoText"></p>
-      <label for="beschreibung" th:text="#{form.beschreibung}">Beschreibung</label>
-      <input type="text" id="beschreibung" th:field="*{beschreibung}" th:errorclass="error" placeholder="Beschreibung" /><br />
+      <label for="beschreibung" th:text="#{form.beschreibung}"></label>
+      <input type="text" id="beschreibung" th:field="*{beschreibung}" th:errorclass="error"/><br />
       <p th:if="${#fields.hasErrors('beschreibung')}" th:errors="*{beschreibung}" class="infoText"></p>
-      <label for="datum">Datum</label>
+      <label for="datum" th:text="#{form.datum}"></label>
       <input type="date" id="datum" th:field="*{datum}" th:errorclass="error" /><br />
       <p th:if="${#fields.hasErrors('datum')}" th:errors="*{datum}" class="infoText"></p>
-      <button class="btn" type="submit">Speichern</button>
+      <button class="btn" type="submit" th:text="#{btn.save}"></button>
     </form>
   </body>
   </body>

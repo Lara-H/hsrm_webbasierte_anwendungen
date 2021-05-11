@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DOSE</title>
+    <title th:text="#{index.headline}"></title>
     <link rel="stylesheet" href="main.css" />
   </head>
   <body id="index">
@@ -9,14 +9,14 @@
       <table>
         <tr>
           <td>
-            <h1>DOSE</h1>
+            <h1 th:text="#{index.headline}"></h1>
           </td>
           <td>
-            <a class="btn" href="/login">Anmelden</a>
+            <a class="btn" href="/login" th:text="#{btn.login}"></a>
           </td>
         </tr>
       </table>
     </div>
-    <p>Direkt Observierbare Siebzehn Erfahrung</p>
+    <p th:text="#{index.textIntro}"></p>
   </body>
 </html>

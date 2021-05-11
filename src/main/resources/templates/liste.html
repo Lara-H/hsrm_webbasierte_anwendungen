@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Meine Sichtungen</title>
+    <title th:text="#{liste.headline}"></title>
     <link rel="stylesheet" href="main.css" th:href="@{/main.css}" />
   </head>
   <body id="liste">
@@ -9,10 +9,10 @@
       <table>
         <tr>
           <td>
-            <h1>Meine Sichtungen</h1>
+            <h1 th:text="#{liste.headline}"></h1>
           </td>
           <td>
-            <a class="btn" href="/sichtung/meine/neu">Neue Sichtung anlegen</a>
+            <a class="btn" href="/sichtung/meine/neu" th:text="#{btn.newSichtung}"></a>
           </td>
         </tr>
       </table>
@@ -20,27 +20,27 @@
     <table class="table">
       <thead>
         <tr>
-          <td>Datum</td>
-          <td>Name</td>
-          <td>Ort</td>
-          <td>Beschreibung</td>
-          <td>Bearbeiten</td>
-          <td>Löschen</td>
+          <td th:text="#{form.datum}"></td>
+          <td th:text="#{form.name}"></td>
+          <td th:text="#{form.ort}"></td>
+          <td th:text="#{form.beschreibung}"></td>
+          <td th:text="#{btn.edit}"></td>
+          <td th:text="#{btn.delete}"></td>
         </tr>
       </thead>
       <tbody>
         <tr th:each="sichtung, nr : ${meinesichtungen}">
-          <td th:text="${sichtung.getDatum()}">Datum</td>
-          <td th:text="${sichtung.getName()}">Name</td>
-          <td th:text="${sichtung.getOrt()}">Ort</td>
-          <td th:text="${sichtung.getBeschreibung()}">Beschreibung</td>
+          <td th:text="${sichtung.getDatum()}"></td>
+          <td th:text="${sichtung.getName()}"></td>
+          <td th:text="${sichtung.getOrt()}"></td>
+          <td th:text="${sichtung.getBeschreibung()}"></td>
           <td>
-            <a th:href="@{'/sichtung/meine/'+${nr.index}}"
-              >Bearbeiten</a
+            <a th:href="@{'/sichtung/meine/'+${nr.index}}" th:text="#{btn.edit}"
+              ></a
             >
           </td>
           <td>
-            <a th:href="@{'/sichtung/meine/'+${nr.index}}+'/del'">Löschen</a
+            <a th:href="@{'/sichtung/meine/'+${nr.index}}+'/del'" th:text="#{btn.delete}"></a
             >
           </td>
         </tr>
