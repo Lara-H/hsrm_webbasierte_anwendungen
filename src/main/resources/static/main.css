@@ -12,17 +12,24 @@ h1 {
     font-size: 2.5rem;
     margin: 0;
 }
-.infoText {
-    font-size: 80%;
-    color: red;
+
+/* INDEX */
+#index {
+    background: url("index_bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
+/* FORMULAR */
 input {
     border-width: 1px;
 }
-
 .error {
     border-color: red;
+}
+.infoText {
+    font-size: 80%;
+    color: red;
 }
 
 /* HEADER */

@@ -3,12 +3,14 @@
   <head>
     <title th:text="#{login.headline}"></title>
     <link rel="stylesheet" href="main.css" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body id="login">
-    <h1 class="header" th:text="#{login.headline}"></h1>
-    <p th:text="#{login.textIntro}"></p>
+    <div class="header">
+      <h1 th:text="#{login.headline}"></h1>
+      <span th:text="#{login.textIntro}"></span>
+    </div>
     <form action="#" th:action="@{/login}" th:object="${user}" method="post">
       <label for="username" th:text="#{form.username}"></label>
       <input type="text" id="username" th:field="*{username}" /><br />
