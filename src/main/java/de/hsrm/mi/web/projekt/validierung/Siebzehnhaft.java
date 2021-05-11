@@ -1,4 +1,4 @@
-package de.hsrm.mi.web.projekt.sichtung.validierung;
+package de.hsrm.mi.web.projekt.validierung;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = SiebzehnValidator.class)
 @Documented
 public @interface Siebzehnhaft {
-    String message() default "Wert muss eine '17' oder das Wort 'Siebzehn' enthalten";
+    String message() default "{siebzehnhaft.fehler}";
     Class<? extends Payload>[] payload() default {};
     Class<?>[] groups() default {};
 }

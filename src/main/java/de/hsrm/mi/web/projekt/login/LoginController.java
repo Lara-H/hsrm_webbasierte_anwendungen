@@ -34,7 +34,7 @@ public class LoginController {
                 return "redirect:/sichtung/meine";
             } else {
                 m.addAttribute("loggedinusername", ""); // Leeren String in SessionAttribut-Liste speichern
-                m.addAttribute("wrongPassword", "Falsches Passwort! Das korrekte Passwort für " + user.getUsername() + " ist " + correctPassword + ".");
+                m.addAttribute("wrongPassword", "{login.wrongPassword} " + user.getUsername() + ": " + correctPassword + ".");
             }
         } 
         return "login"; 

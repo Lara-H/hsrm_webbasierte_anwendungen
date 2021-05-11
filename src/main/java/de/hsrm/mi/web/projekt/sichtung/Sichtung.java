@@ -12,23 +12,23 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import de.hsrm.mi.web.projekt.sichtung.validierung.Siebzehnhaft;
+import de.hsrm.mi.web.projekt.validierung.Siebzehnhaft;
 
 public class Sichtung {
 
-    @Size(min=3,max=80,message="Name muss zwischen {min} und {max} Zeichen lang sein.")
+    @Size(min=3,max=80,message="{form.nameSize}")
     private String name;
 
-    @Size(min=3,max=80,message="Ort muss zwischen {min} und {max} Zeichen lang sein.")
+    @Size(min=3,max=80,message="{form.ortSize}")
     private String ort;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message="Datum darf nicht leer sein.")
-    @PastOrPresent(message = "Das Datum darf nicht in der Zukunft liegen.")
+    @NotNull(message="{form.datumNotNull}")
+    @PastOrPresent(message = "{form.datumPastOrPresent}")
     private LocalDate datum;
 
     @Siebzehnhaft
-    @Size(min=3,max=80,message="Beschreibung muss zwischen {min} und {max} Zeichen lang sein.")
+    @Size(min=3,max=80,message="{form.beschreibungSize}")
     private String beschreibung;
 
     public Sichtung() {

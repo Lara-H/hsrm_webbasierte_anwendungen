@@ -3,6 +3,8 @@
   <head>
     <title th:text="#{liste.headline}"></title>
     <link rel="stylesheet" href="main.css" th:href="@{/main.css}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
   </head>
   <body id="liste">
     <div class="header">
@@ -10,9 +12,15 @@
         <tr>
           <td>
             <h1 th:text="#{liste.headline}"></h1>
+            Wollen sie <a th:href="@{?sprache=de}">Deutsch</a> oder
+            <a th:href="@{?sprache=en}">Englisch</a>?
           </td>
           <td>
-            <a class="btn" href="/sichtung/meine/neu" th:text="#{btn.newSichtung}"></a>
+            <a
+              class="btn"
+              href="/sichtung/meine/neu"
+              th:text="#{btn.newSichtung}"
+            ></a>
           </td>
         </tr>
       </table>
@@ -35,13 +43,16 @@
           <td th:text="${sichtung.getOrt()}"></td>
           <td th:text="${sichtung.getBeschreibung()}"></td>
           <td>
-            <a th:href="@{'/sichtung/meine/'+${nr.index}}" th:text="#{btn.edit}"
-              ></a
-            >
+            <a
+              th:href="@{'/sichtung/meine/'+${nr.index}}"
+              th:text="#{btn.edit}"
+            ></a>
           </td>
           <td>
-            <a th:href="@{'/sichtung/meine/'+${nr.index}}+'/del'" th:text="#{btn.delete}"></a
-            >
+            <a
+              th:href="@{'/sichtung/meine/'+${nr.index}}+'/del'"
+              th:text="#{btn.delete}"
+            ></a>
           </td>
         </tr>
       </tbody>
