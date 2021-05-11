@@ -6,6 +6,7 @@ package de.hsrm.mi.web.projekt.sichtung;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
@@ -17,9 +18,11 @@ import de.hsrm.mi.web.projekt.validierung.Siebzehnhaft;
 public class Sichtung {
 
     @Size(min=3,max=80,message="{form.nameSize}")
+    @NotBlank
     private String name;
 
     @Size(min=3,max=80,message="{form.ortSize}")
+    @NotBlank
     private String ort;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
