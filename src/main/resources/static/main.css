@@ -13,7 +13,16 @@ h1 {
     margin: 0;
 }
 .infoText {
+    font-size: 80%;
     color: red;
+}
+
+input {
+    border-width: 1px;
+}
+
+.error {
+    border-color: red;
 }
 
 /* HEADER */

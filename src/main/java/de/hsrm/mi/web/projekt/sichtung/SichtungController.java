@@ -6,9 +6,14 @@ package de.hsrm.mi.web.projekt.sichtung;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +37,20 @@ public class SichtungController {
         m.addAttribute("meinesichtungen", listSichtungen);
     }
 
+
+@GetMapping("/")
+public String viewHomePage(Model m, HttpServletRequest request) {
+    m.addAttribute("pageTitle", "Test");
+    Locale currentLocale = request.getLocale();
+    String countryCode = currentLocale.getCountry();
+    String countryName = currentLocale.getDisplayCountry();
+    String langCode = currentLocale.getLanguage();
+    String langName = currentLocale.getDisplayLanguage();
+    System.out.println(countryCode + ": " + countryName);
+    System.out.println(langCode + ": " + langName);
+    return "bearbeiten";
+}
+
     @GetMapping("/sichtung/meine")
     public String showSichtungen(Model m) {
         return "liste";
@@ -44,26 +63,28 @@ public class SichtungController {
     }
 
     @PostMapping("/sichtung/meine/neu")
-    public String submitForm(Model m, @ModelAttribute("meinesichtungform")Sichtung sichtung, @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
-        if (sichtung.getName() != "") {
-            listSichtungen.add(sichtung);
-            m.addAttribute("meinesichtungform", listSichtungen);
-            return "redirect:/sichtung/meine";
-        } else {
-            m.addAttribute("emptyEntry", "Bitte geben Sie einen Namen ein.");
+    public String submitForm(Model m, @Valid @ModelAttribute("meinesichtungform") Sichtung sichtung, BindingResult sichtungErrors,
+    @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
+        if (sichtungErrors.hasErrors()) {
+            return "bearbeiten";
         }
-        return "redirect:/sichtung/meine/neu";
+
+        listSichtungen.add(sichtung);
+        //m.addAttribute("meinesichtungform", listSichtungen);
+        return "redirect:/sichtung/meine";
     }
 
     @GetMapping("/sichtung/meine/{nr}/del")
-    public String delete(Model m, @PathVariable int nr, @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
+    public String delete(Model m, @PathVariable int nr,
+            @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
         logger.info("Element gelöscht");
         listSichtungen.remove(nr);
         return "redirect:/sichtung/meine";
     }
 
     @GetMapping("/sichtung/meine/{nr}")
-    public String edit(Model m, @PathVariable int nr, @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
+    public String edit(Model m, @PathVariable int nr,
+            @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
         m.addAttribute("meinesichtungform", listSichtungen.get(nr));
         listSichtungen.remove(nr);
         return "bearbeiten";

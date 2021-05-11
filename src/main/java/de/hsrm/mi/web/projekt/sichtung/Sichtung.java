@@ -5,13 +5,30 @@
 package de.hsrm.mi.web.projekt.sichtung;
 
 import java.time.LocalDate;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
+import de.hsrm.mi.web.projekt.sichtung.validierung.Siebzehnhaft;
+
 public class Sichtung {
+
+    @Size(min=3,max=80,message="Name muss zwischen {min} und {max} Zeichen lang sein.")
     private String name;
+
+    @Size(min=3,max=80,message="Ort muss zwischen {min} und {max} Zeichen lang sein.")
     private String ort;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message="Datum darf nicht leer sein.")
+    @PastOrPresent(message = "Das Datum darf nicht in der Zukunft liegen.")
     private LocalDate datum;
+
+    @Siebzehnhaft
+    @Size(min=3,max=80,message="Beschreibung muss zwischen {min} und {max} Zeichen lang sein.")
     private String beschreibung;
 
     public Sichtung() {
