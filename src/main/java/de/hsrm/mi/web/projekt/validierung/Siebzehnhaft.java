@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = SiebzehnValidator.class)
 @Documented
 public @interface Siebzehnhaft {
-    String message() default "{siebzehnhaft.fehler}";
     Class<? extends Payload>[] payload() default {};
     Class<?>[] groups() default {};
+	String message();
 }

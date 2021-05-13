@@ -7,7 +7,7 @@ public class SiebzehnValidator implements ConstraintValidator<Siebzehnhaft, Stri
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext ctx) {
-        if (value.toUpperCase().contains("17") | value.toUpperCase().contains("{siebzehnhaft.siebzehn}")) {
+        if (value.toUpperCase().contains("17") | value.toUpperCase().contains("SIEBZEHN")) {
             return true;
         }
         return false;

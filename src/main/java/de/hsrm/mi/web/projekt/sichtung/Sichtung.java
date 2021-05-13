@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+//import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,11 +27,12 @@ public class Sichtung {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message="{form.datumNotNull}")
-    @PastOrPresent(message = "{form.datumPastOrPresent}")
+    //@PastOrPresent(message = "{form.datumPastOrPresent}")
     private LocalDate datum;
 
-    @Siebzehnhaft
+    @Siebzehnhaft(message="{siebzehnhaft.fehler}")
     @Size(min=3,max=80,message="{form.beschreibungSize}")
+    @NotBlank
     private String beschreibung;
 
     public Sichtung() {

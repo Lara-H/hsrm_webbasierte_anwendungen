@@ -36,24 +36,23 @@ public class SichtungController {
 
     @GetMapping("/sichtung/meine")
     public String showSichtungen(Model m) {
-        return "liste";
+        return "sichtung/liste";
     }
 
     @GetMapping("/sichtung/meine/neu")
     public String newSichtung(Model m) {
         m.addAttribute("meinesichtungform", new Sichtung());
-        return "bearbeiten";
+        return "sichtung/meine/bearbeiten";
     }
 
     @PostMapping("/sichtung/meine/neu")
     public String submitForm(Model m, @Valid @ModelAttribute("meinesichtungform") Sichtung sichtung, BindingResult sichtungErrors,
     @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
         if (sichtungErrors.hasErrors()) {
-            return "bearbeiten";
+            return "sichtung/meine/bearbeiten";
         }
-
         listSichtungen.add(sichtung);
-        //m.addAttribute("meinesichtungform", listSichtungen);
+        m.addAttribute("meinesichtungform", listSichtungen);
         return "redirect:/sichtung/meine";
     }
 
@@ -70,7 +69,7 @@ public class SichtungController {
             @ModelAttribute("meinesichtungen") List<Sichtung> listSichtungen) {
         m.addAttribute("meinesichtungform", listSichtungen.get(nr));
         listSichtungen.remove(nr);
-        return "bearbeiten";
+        return "sichtung/meine/bearbeiten";
     }
 
 }
