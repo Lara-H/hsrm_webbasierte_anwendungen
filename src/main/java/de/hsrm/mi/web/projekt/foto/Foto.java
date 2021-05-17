@@ -1,16 +1,19 @@
 package de.hsrm.mi.web.projekt.foto;
 
 import java.time.LocalDateTime;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Foto {
     @Id @GeneratedValue long id;
-    @GeneratedValue long version;
+    @Version long version;
     @NotBlank private String mimetype = "";
     @Size(min=3,message="Mindenstens {min} Zeichen notwendig.") @NotBlank private String dateiname = "";
     private String ort = "";

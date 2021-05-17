@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import de.hsrm.mi.web.projekt.utils.FotoBearbeitungService;
@@ -25,7 +26,7 @@ public class FotoServiceImpl implements FotoService {
   }
 
   public List<Foto> alleFotosNachZeitstempelSortiert() {
-    return fotoRepository.findAll();
+    return fotoRepository.findAll(Sort.by("zeitstempel"));
   }
 
   public void loescheFoto(Long id) {}

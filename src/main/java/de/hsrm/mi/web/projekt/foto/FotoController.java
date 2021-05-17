@@ -1,3 +1,5 @@
+// import org.springframework.beans.factory.annotation.Autowired;
+
 // package de.hsrm.mi.web.projekt.foto;
 
 // import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@
 
 // @Controller
 // public class FotoController {
+//        @Autowired FotoService fotoservice;
 //     Logger logger = LoggerFactory.getLogger(FotoController.class);
 
 //     @PostMapping("/foto")
