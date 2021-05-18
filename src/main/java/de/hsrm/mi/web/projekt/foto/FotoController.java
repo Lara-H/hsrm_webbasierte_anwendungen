@@ -21,8 +21,6 @@ import org.slf4j.LoggerFactory;
 
 @Controller
 public class FotoController {
-    //public static final String UPLOADDIR = "/tmp";
-
     @Autowired
     FotoService fotoservice;
     Logger logger = LoggerFactory.getLogger(FotoController.class);
@@ -36,8 +34,6 @@ public class FotoController {
     public String postFoto(@RequestParam("datei") MultipartFile datei, Model m, @ModelAttribute("fotos") List<Foto> fotoListe) {
         try {
             Foto foto = new Foto(datei.getOriginalFilename(), datei.getBytes(), datei.getContentType());
-            //String filename = datei.getOriginalFilename();
-            //Path zielpfad = Paths.get(UPLOADDIR, filename);
             if (datei.getSize() > 16) {
                 fotoservice.fotoAbspeichern(foto);
             }

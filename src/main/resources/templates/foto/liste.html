@@ -35,6 +35,7 @@
           <td th:text="Zeitstempel"></td>
           <td th:text="Bild"></td>
           <td th:text="Map"></td>
+          <td th:text="Löschen"></td>
         </tr>
       </thead>
       <tbody>
@@ -54,6 +55,12 @@
               target="_blank"
               th:href="|https://www.openstreetmap.org/#map=17/${foto.geobreite}/${foto.geolaenge}|"
               th:text="${foto.ort}"
+            ></a>
+          </td>
+          <td>
+            <a
+              th:href="@{'/foto/'+${foto.id}}+'/del'"
+              th:text="#{btn.delete}"
             ></a>
           </td>
         </tr>

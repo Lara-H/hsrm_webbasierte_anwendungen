@@ -13,25 +13,25 @@ import de.hsrm.mi.web.projekt.utils.FotoBearbeitungService;
 public class FotoServiceImpl implements FotoService {
 
   @Autowired FotoBearbeitungService fbservice;
-  @Autowired FotoRepository fotoRepository;
+  @Autowired FotoRepository fotorepo;
 
   public Foto fotoAbspeichern(Foto foto) {
     fbservice.aktualisiereMetadaten(foto);
     fbservice.orientiereFoto(foto);
-    Foto gemanagetesFoto = fotoRepository.save(foto);
+    Foto gemanagetesFoto = fotorepo.save(foto);
     return gemanagetesFoto;
   }
 
   public Optional<Foto> fotoAbfragenNachId(Long id) {
-    Optional<Foto> optionalFoto = fotoRepository.findById(id);
+    Optional<Foto> optionalFoto = fotorepo.findById(id);
     return optionalFoto;
   }
 
   public List<Foto> alleFotosNachZeitstempelSortiert() {
-    return fotoRepository.findAll(Sort.by("zeitstempel"));
+    return fotorepo.findAll(Sort.by("zeitstempel"));
   }
 
   public void loescheFoto(Long id) {
-    fotoRepository.deleteById(id);
+    fotorepo.deleteById(id);
   }
 }
