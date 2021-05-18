@@ -1,37 +1,72 @@
-// import org.springframework.beans.factory.annotation.Autowired;
+package de.hsrm.mi.web.projekt.foto;
 
-// package de.hsrm.mi.web.projekt.foto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.ui.Model;
 
-// import org.springframework.stereotype.Controller;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.ui.Model;
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-// @Controller
-// public class FotoController {
-//        @Autowired FotoService fotoservice;
-//     Logger logger = LoggerFactory.getLogger(FotoController.class);
 
-//     @PostMapping("/foto")
-//     public String postFoto(Model m) {
-//         return "foto/list";
-//     }
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-//     @GetMapping("/foto")
-//     public String getFoto(Model m) {
-//         return "foto/list";
-//     }
+@Controller
+public class FotoController {
+    //public static final String UPLOADDIR = "/tmp";
 
-//     @GetMapping("/foto/{id}")
-//     public String getFotoId(Model m) {
-//         return null;
-//     }
+    @Autowired
+    FotoService fotoservice;
+    Logger logger = LoggerFactory.getLogger(FotoController.class);
 
-//     @GetMapping("/foto/{id}/del")
-//     public String deleteFoto(Model m) {
-//         return "foto/list";
-//     }
+    @ModelAttribute("fotos")
+    public void initListe(Model m){
+        m.addAttribute("fotos", new ArrayList<Foto>());
+    }
     
-// }
+    @PostMapping("/foto")
+    public String postFoto(@RequestParam("datei") MultipartFile datei, Model m, @ModelAttribute("fotos") List<Foto> fotoListe) {
+        try {
+            Foto foto = new Foto(datei.getOriginalFilename(), datei.getBytes(), datei.getContentType());
+            //String filename = datei.getOriginalFilename();
+            //Path zielpfad = Paths.get(UPLOADDIR, filename);
+            if (datei.getSize() > 16) {
+                fotoservice.fotoAbspeichern(foto);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		m.addAttribute("fotos", fotoservice.alleFotosNachZeitstempelSortiert());
+        return "foto/liste";
+    }
+
+    @GetMapping("/foto")
+    public String getFoto(Model m, @ModelAttribute("fotos") List<Foto> fotoListe) {
+        m.addAttribute("fotos", fotoservice.alleFotosNachZeitstempelSortiert());
+        
+        return "foto/liste";
+    }
+
+    @GetMapping("/foto/{id}")
+    public ResponseEntity<byte[]> getFotoId(Model m, @PathVariable Long id) {
+        Foto foto = fotoservice.fotoAbfragenNachId(id).get();
+        return ResponseEntity.ok()
+            .header("Content-Type", foto.getMimetype())
+            .body(foto.getFotodaten());
+    }
+
+    @GetMapping("/foto/{id}/del")
+    public String deleteFoto(Model m, @PathVariable Long id) {
+        fotoservice.loescheFoto(id);
+        return "redirect:/foto";
+    }
+    
+}

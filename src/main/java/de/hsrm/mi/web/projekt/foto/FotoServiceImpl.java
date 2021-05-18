@@ -18,16 +18,20 @@ public class FotoServiceImpl implements FotoService {
   public Foto fotoAbspeichern(Foto foto) {
     fbservice.aktualisiereMetadaten(foto);
     fbservice.orientiereFoto(foto);
-    return foto;
+    Foto gemanagetesFoto = fotoRepository.save(foto);
+    return gemanagetesFoto;
   }
 
   public Optional<Foto> fotoAbfragenNachId(Long id) {
-    return null;
+    Optional<Foto> optionalFoto = fotoRepository.findById(id);
+    return optionalFoto;
   }
 
   public List<Foto> alleFotosNachZeitstempelSortiert() {
     return fotoRepository.findAll(Sort.by("zeitstempel"));
   }
 
-  public void loescheFoto(Long id) {}
+  public void loescheFoto(Long id) {
+    fotoRepository.deleteById(id);
+  }
 }

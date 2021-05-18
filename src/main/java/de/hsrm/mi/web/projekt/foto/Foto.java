@@ -12,8 +12,28 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Foto {
-    @Id @GeneratedValue long id;
-    @Version long version;
+    @Id
+    @GeneratedValue
+    long id;
+    @Version
+    long version;
+
+    public long getId() {
+		return this.id;
+	}
+
+    public void setId(long id) {
+		this.id = id;
+	}
+
+    public long getVersion() {
+        return this.version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
     @NotBlank private String mimetype = "";
     @Size(min=3,message="Mindenstens {min} Zeichen notwendig.") @NotBlank private String dateiname = "";
     private String ort = "";
@@ -22,13 +42,14 @@ public class Foto {
     private double geobreite = 0;
     @Lob private byte[] fotodaten;
 
-    public Foto(String mimetype, String dateiname, String ort, LocalDateTime zeitstempel, double geolaenge, double geobreite) {
-        this.mimetype = mimetype;
+    public Foto(String dateiname, byte[] fotodaten, String mimetype) {
         this.dateiname = dateiname;
-        this.ort = ort;
-        this.zeitstempel = zeitstempel;
-        this.geolaenge = geolaenge;
-        this.geobreite = geobreite;
+        this.fotodaten = fotodaten;
+        this.mimetype = mimetype;
+    }
+
+    public Foto() {
+        
     }
 
     public String getMimetype() {
