@@ -6,7 +6,7 @@ package de.hsrm.mi.web.projekt.sichtung;
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-//import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import de.hsrm.mi.web.projekt.validierung.Siebzehnhaft;
@@ -23,7 +23,7 @@ public class Sichtung {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message="{form.datumNotNull}")
-    //@PastOrPresent(message = "{form.datumPastOrPresent}")
+    @PastOrPresent(message = "{form.datumPastOrPresent}")
     private LocalDate datum;
 
     @Siebzehnhaft(message="{siebzehnhaft.fehler}")

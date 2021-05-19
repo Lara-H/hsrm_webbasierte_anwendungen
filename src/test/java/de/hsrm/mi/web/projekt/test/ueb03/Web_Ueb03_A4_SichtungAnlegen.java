@@ -35,7 +35,7 @@ import de.hsrm.mi.web.projekt.sichtung.SichtungController;
 class Web_Ueb03_A4_SichtungAnlegen {
     private final String TESTNAME = "Joghurta";
     private final String TESTORT = "In der Ecke 17, 99441 Vollradisroda";
-    private final String TESTDATUM = "2022-07-17";
+    private final String TESTDATUM = "2020-07-17";
 	private final String TESTBESCHREIBUNG = "17 Waschbären schlichen um mein Auto";
 
 	@Autowired
@@ -113,10 +113,10 @@ class Web_Ueb03_A4_SichtungAnlegen {
 	@DisplayName("Mehrere POST auf /sichtung/meine/neu zum Anlegen mehrerer Listeneinträge auf /angebot")
 	void angebot_neu_post_many() throws Exception {
 		String[][] w = {
-			{"Albert", "Astweg 1, 52070 Aachen", "2022-01-11", "Habe 17 Erbsen gezählt"},
-			{"Berta", "Bommel Berg 25, 10115 Berlin", "2022-02-22", "Ganze 17 Euro gewonnen"},
-			{"Charles", "Chemieplatz 456, 09117 Chemnitz", "2022-03-03", "Doppelsiebzehnten Geburtstag gefeiert"},
-			{"Dora-Viktualia ", "In den Blamuesen 1234, 40489 Duesseldorf bei Krefeld", "2022-04-04", "Meine 17 ist kaputt."},
+			{"Albert", "Astweg 1, 52070 Aachen", "2021-01-11", "Habe 17 Erbsen gezählt"},
+			{"Berta", "Bommel Berg 25, 10115 Berlin", "2021-02-22", "Ganze 17 Euro gewonnen"},
+			{"Charles", "Chemieplatz 456, 09117 Chemnitz", "2021-03-03", "Doppelsiebzehnten Geburtstag gefeiert"},
+			{"Dora-Viktualia ", "In den Blamuesen 1234, 40489 Duesseldorf bei Krefeld", "2021-04-04", "Meine 17 ist kaputt."},
 		};
 
 		Map<String, Object> sessiondata = new HashMap<>();

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{login.headline}"></title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body id="fotologin">
+    <div class="header">
+      <h1 th:text="#{login.headline}"></h1>
+      <span th:text="#{login.textIntro}"></span>
+    </div>
+    <form action="#" th:action="@{/fotologin}" th:object="${user}" method="post">
+      <label for="username" th:text="#{form.username}"></label>
+      <input type="text" id="username" th:field="*{username}" /><br />
+      <label for="password" th:text="#{form.password}"></label>
+      <input type="password" id="password" th:field="*{password}" /><br />
+      <button class="btn" type="submit" th:text="#{btn.login}"></button>
+    </form>
+    <p class="infoText" th:text="${wrongPassword}"></p>
+  </body>
+</html>

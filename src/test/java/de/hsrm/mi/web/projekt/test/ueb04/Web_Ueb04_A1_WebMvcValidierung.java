@@ -27,7 +27,7 @@ import de.hsrm.mi.web.projekt.sichtung.SichtungController;
 class Web_Ueb04_A1_WebMvcValidierung {
     private final String TESTNAME = "Joghurta Biffel";
     private final String TESTORT = "In der Ecke 17, 99441 Vollradisroda";
-    private final String TESTDATUM = "2022-07-17";
+    private final String TESTDATUM = "2020-07-17";
 	private final String TESTBESCHREIBUNG = "Riesige siebzehn an Plakatwand 17 observiert";
 
 	@Autowired
