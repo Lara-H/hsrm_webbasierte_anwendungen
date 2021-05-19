@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title th:text="#{liste.headline}"></title>
+    <title th:text="#{foto.liste.headline}"></title>
     <link rel="stylesheet" href="main.css" th:href="@{/main.css}" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -11,7 +11,7 @@
       <table>
         <tr>
           <td>
-            <h1 th:text="#{liste.headline}"></h1>
+            <h1 th:text="#{foto.liste.headline}"></h1>
           </td>
         </tr>
       </table>
@@ -23,19 +23,19 @@
       th:method="post"
       enctype="multipart/form-data"
     >
-      <label for="datei" th:text="Datei"></label>
+      <label for="datei" th:text="#{form.file}"></label>
       <input type="file" name="datei" />
-      <button class="btn" type="submit" th:text="#{btn.save}"></button>
+      <button class="btn" type="submit" th:text="#{btn.upload}"></button>
     </form>
 
     <table class="table">
       <thead>
         <tr>
-          <td th:text="Dateiname"></td>
-          <td th:text="Zeitstempel"></td>
-          <td th:text="Bild"></td>
-          <td th:text="Map"></td>
-          <td th:text="Löschen"></td>
+          <td th:text="#{form.filename}"></td>
+          <td th:text="#{form.timestamp}"></td>
+          <td th:text="#{form.image}"></td>
+          <td th:text="#{form.map}"></td>
+          <td th:text="#{btn.delete}"></td>
         </tr>
       </thead>
       <tbody>
