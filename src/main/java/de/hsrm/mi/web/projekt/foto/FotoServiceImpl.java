@@ -36,4 +36,32 @@ public class FotoServiceImpl implements FotoService {
   public void loescheFoto(Long id) {
     fotorepo.deleteById(id);
   }
+
+  public void fotoKommentieren(long id, String autor, String kommentar) {
+    try {
+      fotorepo.findById(id).get().getKommentare().add(new Kommentar(autor, kommentar));
+    }
+    catch (Exception e) {
+      new NoSuchElementException();
+    }
+  }
+
+  public List<Kommentar> alleKommentareFuerFoto(long fotoid) {
+    try {
+      return fotorepo.findById(fotoid).get().getKommentare();
+    }
+    catch (Exception e) {
+      new NoSuchElementException();
+    }
+    return null;
+  }
+
+  public void fotoKommentarLoeschen(long fotoid, long kid) {
+    try {
+      fotorepo.findById(fotoid).get().getKommentare().remove((int) kid);
+    }
+    catch (Exception e) {
+      new NoSuchElementException();
+    }
+  }
 }
