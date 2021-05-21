@@ -18,6 +18,8 @@ public class FotoServiceImpl implements FotoService {
   public Foto fotoAbspeichern(Foto foto) {
     fbservice.aktualisiereMetadaten(foto);
     fbservice.orientiereFoto(foto);
+    Optional<String> adresse = new AdressServiceImpl().findeAdresse(foto.getGeobreite(), foto.getGeolaenge());
+    foto.setOrt(adresse.get());
     Foto gemanagetesFoto = fotorepo.save(foto);
     return gemanagetesFoto;
   }

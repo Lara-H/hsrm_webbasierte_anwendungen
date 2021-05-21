@@ -72,8 +72,8 @@ public class Foto {
         return this.ort;
     }
 
-    public void setOrt(String ort) {
-        this.ort = ort;
+    public void setOrt(String optional) {
+        this.ort = optional;
     }
 
     public LocalDateTime getZeitstempel() {
