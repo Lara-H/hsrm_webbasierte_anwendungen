@@ -58,16 +58,29 @@ public class Foto {
     //     kommentare.removeAll(kommentare);
     // }
 
+    public void addKommentar(Kommentar kommentar) {
+        kommentare.add(kommentar);
+    }
+
+    public void removeKommentar(Kommentar kommentar) {
+        kommentare.remove(kommentar);
+    }
+
+    public Kommentar findKommentarById(long id) {
+        for (Kommentar kommentar : kommentare) {
+            if (kommentar.getId() == id) {
+                return kommentar;
+            }
+        }
+        return null;
+    }
+
     public List<Kommentar> getKommentare() {
         return this.kommentare;
     }
 
     public void setKommentare(List<Kommentar> kommentare) {
         this.kommentare = kommentare;
-    }
-
-    public void addKommentar(Kommentar kommentar) {
-        kommentare.add(kommentar);
     }
 
     public long getId() {
