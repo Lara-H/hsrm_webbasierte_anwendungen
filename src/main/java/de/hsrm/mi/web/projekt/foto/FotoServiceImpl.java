@@ -1,6 +1,7 @@
 package de.hsrm.mi.web.projekt.foto;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,31 +38,15 @@ public class FotoServiceImpl implements FotoService {
     fotorepo.deleteById(id);
   }
 
-  public void fotoKommentieren(long id, String autor, String kommentar) {
-    try {
+  public void fotoKommentieren(long id, String autor, String kommentar) throws NoSuchElementException {
       fotorepo.findById(id).get().getKommentare().add(new Kommentar(autor, kommentar));
-    }
-    catch (Exception e) {
-      new NoSuchElementException();
-    }
   }
 
-  public List<Kommentar> alleKommentareFuerFoto(long fotoid) {
-    try {
+  public List<Kommentar> alleKommentareFuerFoto(long fotoid) throws NoSuchElementException {
       return fotorepo.findById(fotoid).get().getKommentare();
-    }
-    catch (Exception e) {
-      new NoSuchElementException();
-    }
-    return null;
   }
 
-  public void fotoKommentarLoeschen(long fotoid, long kid) {
-    try {
+  public void fotoKommentarLoeschen(long fotoid, long kid) throws NoSuchElementException {
       fotorepo.findById(fotoid).get().getKommentare().remove((int) kid);
-    }
-    catch (Exception e) {
-      new NoSuchElementException();
-    }
   }
 }
