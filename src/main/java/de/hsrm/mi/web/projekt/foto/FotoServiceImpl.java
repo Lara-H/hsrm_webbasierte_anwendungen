@@ -39,7 +39,9 @@ public class FotoServiceImpl implements FotoService {
   }
 
   public void fotoKommentieren(long id, String autor, String kommentar) throws NoSuchElementException {
-      fotorepo.findById(id).get().getKommentare().add(new Kommentar(autor, kommentar));
+      Foto foto = fotorepo.findById(id).get();
+      foto.addKommentar(new Kommentar(autor, kommentar));
+      fotorepo.save(foto);
   }
 
   public List<Kommentar> alleKommentareFuerFoto(long fotoid) throws NoSuchElementException {
@@ -47,6 +49,6 @@ public class FotoServiceImpl implements FotoService {
   }
 
   public void fotoKommentarLoeschen(long fotoid, long kid) throws NoSuchElementException {
-      fotorepo.findById(fotoid).get().getKommentare().remove((int) kid);
+      fotorepo.getOne(fotoid).getKommentare().remove((int) kid);
   }
 }

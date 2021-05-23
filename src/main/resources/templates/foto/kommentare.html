@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{foto.liste.headline}"></title>
+    <link rel="stylesheet" href="main.css" th:href="@{/main.css}" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  </head>
+  <body id="foto_liste">
+    <div class="header">
+      <table>
+        <tr>
+          <td>
+            <h1 th:text="Hasskommentare"></h1>
+          </td>
+          <td>
+            <a
+              class="btn"
+              href="/foto"
+              th:text="#{btn.zuVielHass}"
+            ></a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <h2 th:text="${foto.dateiname}"></h2>
+    <p th:text="${foto.zeitstempel}"></p>
+    <img
+      th:src="@{/foto/{id}(id=${foto.id})}"
+      th:alt="${foto.dateiname}"
+      width="500"
+      height="auto"
+    />
+    <a
+      target="_blank"
+      th:href="|https://www.openstreetmap.org/#map=17/${foto.geobreite}/${foto.geolaenge}|"
+      th:text="${foto.ort}"
+    ></a>
+
+    <h2>Hasskommentare</h2>
+    <form
+      th:if="${loggedinusername != null}"
+      action="#"
+      th:action="@{/foto/{id}/kommentar(id=${foto.id})}"
+      th:method="post"
+      enctype="multipart/form-data"
+    >
+      <label for="kommentarText" th:text="Kommentar"></label>
+      <input type="text" name="kommentarText" /><br />
+      <button class="btn" type="submit" th:text="Anschicken"></button>
+    </form>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <td th:text="Autor"></td>
+          <td th:text="Zeitpunkt"></td>
+          <td th:text="Text"></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="kommentar : ${kommentare}">
+          <td th:text="${kommentar.autor}"></td>
+          <td th:text="${kommentar.zeitpunkt}"></td>
+          <td th:text="${kommentar.text}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

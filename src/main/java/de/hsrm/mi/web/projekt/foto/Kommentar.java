@@ -27,6 +27,10 @@ public class Kommentar {
         this.text = text;
     }
 
+    public Kommentar() {
+        
+    }
+
     public long getId() {
         return this.id;
     }

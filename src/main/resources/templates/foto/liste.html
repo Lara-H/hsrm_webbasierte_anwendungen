@@ -36,6 +36,7 @@
           <td th:text="#{form.image}"></td>
           <td th:text="#{form.map}"></td>
           <td th:text="#{btn.delete}"></td>
+          <td th:text="Kommentare"></td>
         </tr>
       </thead>
       <tbody>
@@ -45,7 +46,7 @@
           <td>
             <img
               th:src="@{foto/{id}(id=${foto.id})}"
-              alt="${foto.dateiname}"
+              th:alt="${foto.dateiname}"
               width="200"
               height="auto"
             />
@@ -61,6 +62,12 @@
             <a
               th:href="@{'/foto/'+${foto.id}}+'/del'"
               th:text="#{btn.delete}"
+            ></a>
+          </td>
+          <td>
+            <a
+              th:href="@{'/foto/'+${foto.id}}+'/kommentar'"
+              th:text="Kommentare"
             ></a>
           </td>
         </tr>

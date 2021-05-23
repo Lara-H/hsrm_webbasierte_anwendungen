@@ -1,13 +1,16 @@
 package de.hsrm.mi.web.projekt.foto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
-import javax.persistence.PreRemove;
+//import javax.persistence.PreRemove;
 import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
@@ -21,8 +24,8 @@ public class Foto {
     @Version long 
     version;
 
-    @OneToMany 
-    List<Kommentar> kommentare;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Kommentar> kommentare = new ArrayList<>();
 
     @NotBlank 
     private String mimetype = "";
@@ -39,7 +42,8 @@ public class Foto {
     
     private double geobreite = 0;
 
-    @Lob private byte[] fotodaten;
+    @Lob 
+    private byte[] fotodaten;
 
     public Foto(String dateiname, byte[] fotodaten, String mimetype) {
         this.dateiname = dateiname;
@@ -50,10 +54,10 @@ public class Foto {
     public Foto() {
     }
 
-    @PreRemove
-    public void kommentareLoeschen(Foto foto) {
-        kommentare.removeAll(kommentare);
-    }
+    // @PreRemove
+    // public void kommentareLoeschen(Foto foto) {
+    //     kommentare.removeAll(kommentare);
+    // }
 
     public List<Kommentar> getKommentare() {
         return this.kommentare;
@@ -61,6 +65,10 @@ public class Foto {
 
     public void setKommentare(List<Kommentar> kommentare) {
         this.kommentare = kommentare;
+    }
+
+    public void addKommentar(Kommentar kommentar) {
+        kommentare.add(kommentar);
     }
 
     public long getId() {
