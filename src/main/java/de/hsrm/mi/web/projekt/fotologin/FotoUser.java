@@ -1,10 +1,5 @@
 package de.hsrm.mi.web.projekt.fotologin;
 
-/**
- * Benutzer des Systems
- */
-
-
 public class FotoUser {
     private String username;
 	private String password;

@@ -1,9 +1,5 @@
 package de.hsrm.mi.web.projekt.fotologin;
 
-/**
- * Controller für Login-Logik
- */
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

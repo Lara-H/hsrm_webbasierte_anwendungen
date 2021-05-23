@@ -1,8 +1,5 @@
-    /**
-     * Controller für Login-Logik
-     */
-
 package de.hsrm.mi.web.projekt.login;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

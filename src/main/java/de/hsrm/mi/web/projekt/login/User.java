@@ -1,7 +1,3 @@
-/**
- * Benutzer des Systems
- */
-
 package de.hsrm.mi.web.projekt.login;
 
 public class User {

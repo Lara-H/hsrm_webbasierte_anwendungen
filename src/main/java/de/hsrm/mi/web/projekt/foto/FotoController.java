@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
-//@SessionAttributes(names = { "fotos" })
 @SessionAttributes(names = { "loggedinusername" }) // Liste mit Benutzernamen
 
 public class FotoController {

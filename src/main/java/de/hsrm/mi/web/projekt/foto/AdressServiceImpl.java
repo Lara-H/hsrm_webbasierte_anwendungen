@@ -1,7 +1,6 @@
 package de.hsrm.mi.web.projekt.foto;
 
 import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
