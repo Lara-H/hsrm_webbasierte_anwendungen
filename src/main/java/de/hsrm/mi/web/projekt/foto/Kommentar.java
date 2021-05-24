@@ -15,20 +15,23 @@ public class Kommentar {
     @Version long 
     version;
 
-    private String autor = "";
+    private String autor;
 
     @PastOrPresent(message = "Darf nicht in der Zukunft liegen.") 
-    private LocalDateTime zeitpunkt = LocalDateTime.MIN;
+    private LocalDateTime zeitpunkt;
     
-    private String text = "";
+    private String text;
 
     public Kommentar(String autor, String text) {
         this.autor = autor;
         this.text = text;
+        this.zeitpunkt = LocalDateTime.now();
     }
 
     public Kommentar() {
-        
+        this.autor = "";
+        this.text = "";
+        this.zeitpunkt = LocalDateTime.now();
     }
 
     public long getId() {

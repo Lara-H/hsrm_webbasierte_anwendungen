@@ -7,12 +7,11 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class AdressServiceImpl implements AdressService {
 
-    RestTemplate restTemplate = new RestTemplate();
-
     public Optional<String> findeAdresse(double geoBreite, double geolaenge) {
+        RestTemplate restTemplate = new RestTemplate();
         String fooResourceUrl = "https://nominatim.openstreetmap.org/reverse?lat="+geoBreite+"&lon="+geolaenge+"&format=json";
         Adresse adresse = restTemplate.getForObject(fooResourceUrl, Adresse.class);
-        if (adresse != null) {
+        if (adresse.getDisplay_name() != null) {
             return Optional.of(adresse.getDisplay_name());
         }
         return Optional.empty();

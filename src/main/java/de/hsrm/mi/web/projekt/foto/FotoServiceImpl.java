@@ -48,7 +48,11 @@ public class FotoServiceImpl implements FotoService {
 
   public void fotoKommentarLoeschen(long fotoid, long kid) throws NoSuchElementException {
     Foto foto = fotorepo.findById(fotoid).get();
-    Kommentar kommentar = foto.findKommentarById(kid);
-    foto.removeKommentar(kommentar);      
+    
+    if(foto.findKommentarById(kid) == null){
+      throw new NoSuchElementException();
+    }else{
+      foto.removeKommentar(foto.findKommentarById(kid));
+  }   
   }
 }
