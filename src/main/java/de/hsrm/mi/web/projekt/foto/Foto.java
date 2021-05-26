@@ -9,22 +9,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
-//import javax.persistence.PreRemove;
 import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Foto {
-    @Id @GeneratedValue long 
-    id;
+    @Id @GeneratedValue 
+    private long id;
 
-    @Version long 
-    version;
+    @Version 
+    private long version;
 
     @JsonIdentityReference(alwaysAsId = true)
     @OneToMany(cascade = CascadeType.ALL)
@@ -45,8 +43,7 @@ public class Foto {
     
     private double geobreite = 0;
 
-    @JsonIgnore
-    @Lob 
+    @JsonIgnore @Lob 
     private byte[] fotodaten;
 
     public Foto(String dateiname, byte[] fotodaten, String mimetype) {
@@ -57,11 +54,6 @@ public class Foto {
 
     public Foto() {
     }
-
-    // @PreRemove
-    // public void kommentareLoeschen(Foto foto) {
-    //     kommentare.removeAll(kommentare);
-    // }
 
     public void addKommentar(Kommentar kommentar) {
         kommentare.add(kommentar);
