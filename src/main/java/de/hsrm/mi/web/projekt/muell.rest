@@ -1,1 +1,17 @@
+GET http://localhost:8080/api/foto
+
+###
+
+DELETE http://localhost:8080/api/foto/1
+
+###
+
+GET http://localhost:8080/api/foto/1/kommentar
+
+###
+
+DELETE http://localhost:8080/api/foto/2/kommentar/2
+
+###
+
 GET http://numbersapi.com/17

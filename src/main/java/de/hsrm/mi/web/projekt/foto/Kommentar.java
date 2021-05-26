@@ -6,7 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
 import javax.validation.constraints.PastOrPresent;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(
+generator = ObjectIdGenerators.PropertyGenerator.class, 
+property = "id")
 @Entity
 public class Kommentar {
     @Id @GeneratedValue long 
@@ -74,11 +79,24 @@ public class Kommentar {
         this.text = text;
     }
 
-    
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (id ^ (id >>> 32));
+        return result;
+    }
 
-
-
-
-
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Kommentar other = (Kommentar) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
 
 }
