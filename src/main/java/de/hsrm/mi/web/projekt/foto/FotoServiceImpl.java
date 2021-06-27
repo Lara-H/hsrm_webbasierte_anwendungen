@@ -5,7 +5,10 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+
+import de.hsrm.mi.web.projekt.messaging.FotoMessage;
 import de.hsrm.mi.web.projekt.utils.FotoBearbeitungService;
 
 @Service
@@ -13,6 +16,7 @@ public class FotoServiceImpl implements FotoService {
 
   @Autowired FotoBearbeitungService fbservice;
   @Autowired FotoRepository fotorepo;
+  @Autowired SimpMessagingTemplate broker;
 
   public Foto fotoAbspeichern(Foto foto) {
     fbservice.aktualisiereMetadaten(foto);
@@ -20,6 +24,7 @@ public class FotoServiceImpl implements FotoService {
     Optional<String> adresse = new AdressServiceImpl().findeAdresse(foto.getGeobreite(), foto.getGeolaenge());
     foto.setOrt(adresse.get());
     Foto gemanagetesFoto = fotorepo.save(foto);
+    broker.convertAndSend("/topic/foto", FotoMessage.FOTO_GESPEICHERT);
     return gemanagetesFoto;
   }
 
@@ -34,6 +39,7 @@ public class FotoServiceImpl implements FotoService {
 
   public void loescheFoto(Long id) {
     fotorepo.deleteById(id);
+    broker.convertAndSend("/topic/foto", FotoMessage.FOTO_GELOESCHT);
   }
 
   public void fotoKommentieren(long id, String autor, String kommentar) throws NoSuchElementException {

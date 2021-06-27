@@ -1,16 +1,16 @@
-GET http://localhost:8080/api/foto
+GET http://localhost:9090/api/foto
 
 ###
 
-DELETE http://localhost:8080/api/foto/1
+DELETE http://localhost:9090/api/foto/1
 
 ###
 
-GET http://localhost:8080/api/foto/1/kommentar
+GET http://localhost:9090/api/foto/1/kommentar
 
 ###
 
-DELETE http://localhost:8080/api/foto/2/kommentar/2
+DELETE http://localhost:9090/api/foto/2/kommentar/2
 
 ###
 
