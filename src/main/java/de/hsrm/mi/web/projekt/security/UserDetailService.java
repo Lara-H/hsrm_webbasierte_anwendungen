@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailService implements UserDetailsService {
     @Autowired private FotoUserRepository FotoUserRepository;
-    // falls nötig auch @Autowired PasswordEncoder passwordencoder;
+    @Autowired private PasswordEncoder passwordencoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -19,7 +20,7 @@ public class UserDetailService implements UserDetailsService {
         // Schritt 2: Spring 'User'-Objekt mit relevanten Daten für 'username' zurückgeben
         return org.springframework.security.core.userdetails.User
         .withUsername(username)
-        .password(user.getPassword()) // falls in DB encoded gespeichert
+        .password(passwordencoder.encode(user.getPassword())) // falls in DB encoded gespeichert
         .roles("USER") // Rolle könnte auch aus DB kommen
         .build();
     }
