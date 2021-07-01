@@ -12,6 +12,7 @@
         <tr>
           <td>
             <h1 th:text="#{foto.liste.headline}"></h1>
+            <p>Hallo <span th:text="${benutzer}"></span>!</p>
           </td>
           <td>
           <form th:action="@{/logout}" th:method="POST">

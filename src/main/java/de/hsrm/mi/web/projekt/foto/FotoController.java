@@ -38,10 +38,7 @@ public class FotoController {
     }
     
     @PostMapping("/foto")
-    public String postFoto(@RequestParam("datei") MultipartFile datei, Model m, @ModelAttribute("fotos") List<Foto> fotoListe, Principal prinz) {
-        String loginname = prinz.getName();
-        m.addAttribute("loggedinusername", loginname);
-        logger.info(loginname);
+    public String postFoto(@RequestParam("datei") MultipartFile datei, Model m, @ModelAttribute("fotos") List<Foto> fotoListe) {
         try {
             Foto foto = new Foto(datei.getOriginalFilename(), datei.getBytes(), datei.getContentType());
             if (datei.getSize() > 16) {
@@ -55,7 +52,9 @@ public class FotoController {
     }
 
     @GetMapping("/foto")
-    public String getFoto(Model m, @ModelAttribute("fotos") List<Foto> fotoListe) {
+    public String getFoto(Model m, @ModelAttribute("fotos") List<Foto> fotoListe, Principal prinz) {
+        String loginname = prinz.getName();
+        m.addAttribute("benutzer", loginname);
         m.addAttribute("fotos", fotoservice.alleFotosNachZeitstempelSortiert());
         
         return "foto/liste";

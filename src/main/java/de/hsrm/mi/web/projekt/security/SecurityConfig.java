@@ -1,5 +1,6 @@
 package de.hsrm.mi.web.projekt.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired UserDetailService UserDetailService;
     @Bean PasswordEncoder passwordEncoder() { // @Bean -> Encoder woanders per @Autowired abrufbar
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
@@ -25,6 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .withUser("joghurta")
         .password(pwenc.encode("geheim123"))
         .roles("PHOTOGRAPH");
+        authmanagerbuilder.userDetailsService(UserDetailService)
+        .passwordEncoder(passwordEncoder());
     } 
 
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/css/*").permitAll()
             .antMatchers("/register", "/logout").permitAll()
             .antMatchers(HttpMethod.DELETE).hasRole("PHOTOGRAPH")
-            .antMatchers(HttpMethod.PUT, "/bag").hasRole("PHOTOGRAPH")
+            .antMatchers(HttpMethod.POST, "/foto").hasRole("PHOTOGRAPH")
             .antMatchers("/user*", "/user/*").authenticated()
             .anyRequest().hasAnyRole("GUCKER", "PHOTOGRAPH")
         .and()
