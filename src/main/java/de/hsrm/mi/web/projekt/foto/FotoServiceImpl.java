@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-
 import de.hsrm.mi.web.projekt.messaging.FotoMessage;
 import de.hsrm.mi.web.projekt.utils.FotoBearbeitungService;
 
@@ -24,7 +23,7 @@ public class FotoServiceImpl implements FotoService {
     Optional<String> adresse = new AdressServiceImpl().findeAdresse(foto.getGeobreite(), foto.getGeolaenge());
     foto.setOrt(adresse.get());
     Foto gemanagetesFoto = fotorepo.save(foto);
-    broker.convertAndSend("/topic/foto", FotoMessage.FOTO_GESPEICHERT);
+    broker.convertAndSend("/topic/foto", new FotoMessage(FotoMessage.FOTO_GESPEICHERT, foto.getId()));
     return gemanagetesFoto;
   }
 
@@ -39,7 +38,7 @@ public class FotoServiceImpl implements FotoService {
 
   public void loescheFoto(Long id) {
     fotorepo.deleteById(id);
-    broker.convertAndSend("/topic/foto", FotoMessage.FOTO_GELOESCHT);
+    broker.convertAndSend("/topic/foto", new FotoMessage(FotoMessage.FOTO_GELOESCHT, id));
   }
 
   public void fotoKommentieren(long id, String autor, String kommentar) throws NoSuchElementException {

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-if="fotostate.errormessage!=''" class="notification is-danger">{{errormessage}}</div>
+    <div v-if="fotostate.errormessage!=''" class="notification is-danger">{{fotostate.errormessage}}</div>
      <h1>{{ msg }}</h1>
     <!-- Button zum Hinzufügen des nächsten Bildes -->
     <button class="button" v-on:click="fotoGeklickt()">
@@ -14,7 +14,7 @@
       <div class="columns is-multiline">
         <!-- Hier alle Bilder mit Hilfe der FotoGalerieBild-Komponente anzeigen -->
         <!-- flexibel natürlich - nicht die fünf Beispielbilder hardcoden! -->
-        <FotoGalerieBild :foto="i" v-for="i in listitems" v-bind:key="i.id" @delete-zeile="delZeile($event)" />
+        <FotoGalerieBild :foto="i" v-for="i in listitems" v-bind:key="i.id" @delete-zeile="deleteFoto($event)" />
         
       </div>
     </section>
@@ -55,7 +55,7 @@ export default defineComponent({
     });
 
 
-    function delZeile(id: number): void {
+    function deleteFoto(id: number): void {
       deleteFotos(id);
     }
 
@@ -71,7 +71,7 @@ export default defineComponent({
     */
 
 
-    return {suchfeld, listitems, neuigkeiten, fotostate, delZeile};
+    return {suchfeld, listitems, neuigkeiten, fotostate, deleteFoto};
   }
 
   

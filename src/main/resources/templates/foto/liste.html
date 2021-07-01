@@ -13,6 +13,11 @@
           <td>
             <h1 th:text="#{foto.liste.headline}"></h1>
           </td>
+          <td>
+          <form th:action="@{/logout}" th:method="POST">
+            <input class="btn" type="submit" value="Logout"/>
+          </form>
+          </td>
         </tr>
       </table>
     </div>

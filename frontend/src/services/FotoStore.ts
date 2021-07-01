@@ -20,14 +20,17 @@ export function useFotoStore(){
     // empfangene Nutzdaten in message.body abrufbar,
     // ggf. mit JSON.parse(message.body) zu JS konvertieren
         const parsedMessage = JSON.parse(message.body) as FotoMessage
-        if (parsedMessage.operation == "FOTO:GESPEICHERT" || parsedMessage.operation == "FOTO_GELÖSCHT") {
-            console.log("Gummibären hüpfen hier und dort und überall")
-            updateFotos()
-            //deleteFotos(parsedMessage.id)
+        console.log("Nachricht eingegangen", message.body)
+        console.log("Nachricht", parsedMessage.operation)
+        if (parsedMessage.operation == "fotoGespeichert" || parsedMessage.operation == "fotoGeloescht") {
+             console.log("Foto geupdatet")
+             updateFotos()
         }
     });
     };
-    stompclient.onDisconnect = () => { /* Verbindung abgebaut*/ }
+    stompclient.onDisconnect = () => { console.log("Verbindung abgebaut") /* Verbindung abgebaut*/ }
+    stompclient.onStompError = () => { console.log("Stomp Error") /* Verbindung abgebaut*/ }
+    stompclient.onWebSocketClose = () => { console.log("WebSocket") /* Verbindung abgebaut*/ }
     // Verbindung zum Broker aufbauen
     stompclient.activate();
 
@@ -42,7 +45,7 @@ export function useFotoStore(){
         ).then(jsondata =>{
             fotostate.fotos = jsondata
         }).catch(fehler => {
-            fotostate.errormessage = 'DU bist ein Fehler: {$fehler}'})
+            fotostate.errormessage = 'Das hat nicht funktioniert: ' + fehler})
     }
 
     async function updateFotos() {

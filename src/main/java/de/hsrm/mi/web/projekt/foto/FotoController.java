@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.security.Principal;
 
 @Controller
 @SessionAttributes(names = { "loggedinusername" }) // Liste mit Benutzernamen
@@ -37,7 +38,10 @@ public class FotoController {
     }
     
     @PostMapping("/foto")
-    public String postFoto(@RequestParam("datei") MultipartFile datei, Model m, @ModelAttribute("fotos") List<Foto> fotoListe) {
+    public String postFoto(@RequestParam("datei") MultipartFile datei, Model m, @ModelAttribute("fotos") List<Foto> fotoListe, Principal prinz) {
+        String loginname = prinz.getName();
+        m.addAttribute("loggedinusername", loginname);
+        logger.info(loginname);
         try {
             Foto foto = new Foto(datei.getOriginalFilename(), datei.getBytes(), datei.getContentType());
             if (datei.getSize() > 16) {
