@@ -38,25 +38,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/h2-console/**").permitAll()
             .antMatchers("/css/*").permitAll()
             .antMatchers("/register", "/logout").permitAll()
+            .antMatchers(HttpMethod.GET, "/foto/{id}/del").hasRole("PHOTOGRAPH")
             .antMatchers(HttpMethod.DELETE).hasRole("PHOTOGRAPH")
             .antMatchers(HttpMethod.POST, "/foto").hasRole("PHOTOGRAPH")
             .antMatchers("/user*", "/user/*").authenticated()
             .anyRequest().hasAnyRole("GUCKER", "PHOTOGRAPH")
         .and()
             .formLogin()
-            .loginPage("/login") // falls eigenes Login-Formular
+            //.loginPage("/login") // falls eigenes Login-Formular
             .defaultSuccessUrl("/foto")
-            .permitAll()
-        .and()
-            .logout()
-            .logoutUrl("/logout") // ist auch Default
-            .logoutSuccessUrl("/")
             .permitAll();
             http.csrf()
             .ignoringAntMatchers("/h2-console/**")
             .ignoringAntMatchers("/api/**");
             http.headers().frameOptions().disable();
-
     }
 }
 

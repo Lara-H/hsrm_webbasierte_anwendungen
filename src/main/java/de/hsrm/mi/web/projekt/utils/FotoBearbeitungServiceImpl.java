@@ -5,31 +5,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import de.hsrm.mi.web.projekt.foto.Foto;
-
-/*
- * Hilfsmethoden zur Bildauswertung und -bearbeitung
- * verwendet https://www.javaxt.com/
- * 
- * In build.gradle Repository und Dependency ergänzen:
- * 
- * ...
- * repositories {
- *	 ...
- *	 maven { url "http://www.javaxt.com/maven" }
- * }
- * ...
- * dependencies {
- *   ...
- *	 implementation 'javaxt:javaxt-core:1.10.4'
- * }  
- * 
- */
 
 @Service
 public class FotoBearbeitungServiceImpl implements FotoBearbeitungService {

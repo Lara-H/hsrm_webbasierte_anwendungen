@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import FotoGalerieView from '@/views/FotoGalerieView.vue'
 import AboutView from '@/views/AboutView.vue'
+import FotoDetailView from '@/views/FotoDetailView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,6 +13,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/about',
     name: 'AboutView',
     component: AboutView
+  },
+  {
+   path: '/detail/:fotoid',
+   name: 'FotoDetailView',
+   component: FotoDetailView,
+   props: true
   }
 ]
 

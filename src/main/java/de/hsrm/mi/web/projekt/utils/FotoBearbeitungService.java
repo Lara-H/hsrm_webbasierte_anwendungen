@@ -1,7 +1,6 @@
 package de.hsrm.mi.web.projekt.utils;
 
 import java.io.IOException;
-
 import de.hsrm.mi.web.projekt.foto.Foto;
 
 public interface FotoBearbeitungService {

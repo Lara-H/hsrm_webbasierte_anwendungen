@@ -6,13 +6,14 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
-  <body id="foto_liste">
+  <body id="foto-liste">
     <div class="header">
       <table>
         <tr>
           <td>
             <h1 th:text="#{foto.liste.headline}"></h1>
-            <p>Hallo <span th:text="${benutzer}"></span>!</p>
+            <span><a th:href="@{?sprache=de}" th:text="#{lang.german}"></a> |
+            <a th:href="@{?sprache=en}" th:text="#{lang.english}"></a></span>
           </td>
           <td>
           <form th:action="@{/logout}" th:method="POST">
@@ -22,7 +23,7 @@
         </tr>
       </table>
     </div>
-
+    <p><span th:text="#{foto.liste.textIntro}"></span> <span th:text="${benutzer}"></span></p>
     <form
       action="#"
       th:action="@{/foto}"
@@ -33,7 +34,6 @@
       <input type="file" name="datei" />
       <button class="btn" type="submit" th:text="#{btn.upload}"></button>
     </form>
-
     <table class="table">
       <thead>
         <tr>
@@ -42,7 +42,7 @@
           <td th:text="#{form.image}"></td>
           <td th:text="#{form.map}"></td>
           <td th:text="#{btn.delete}"></td>
-          <td th:text="Kommentare"></td>
+          <td th:text="#{foto.liste.kommentare}"></td>
         </tr>
       </thead>
       <tbody>
@@ -73,7 +73,7 @@
           <td>
             <a
               th:href="@{'/foto/'+${foto.id}}+'/kommentar'"
-              th:text="Kommentare"
+              th:text="#{foto.liste.kommentare}"
             ></a>
           </td>
         </tr>

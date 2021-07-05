@@ -12,9 +12,11 @@
     </div>
     <div class="card-content has-text-centered">
       <!-- Bild anzeigen -->
-      <figure class="image is-inline-block">
-        <img :src="url" />
-      </figure>
+      <router-link :to="{name:'FotoDetailView', params: {fotoid: foto.id} }">
+        <figure class="image is-inline-block">
+          <img :src="url" />
+        </figure>
+      </router-link>
       <div class="content">
         <foto-star-rating :maxsterne="5" />
       </div>

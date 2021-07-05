@@ -1,8 +1,5 @@
-/**
- * Einzelne Sichtung
- */
-
 package de.hsrm.mi.web.projekt.sichtung;
+
 import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

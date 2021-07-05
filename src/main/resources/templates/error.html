@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Error</title>
+    <title th:text="#{error.headline}"></title>
     <link rel="stylesheet" href="main.css" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body id="error">
-    <h1>Mit jeder Fehlerseite verlieren 17 Hunde ihren Knochen</h1>
-    <p>Schämen Sie sich!</p>
+    <div class="header">
+      <table>
+        <tr>
+          <td>
+            <h1 th:text="#{error.headline}"></h1>
+            <span th:text="#{error.textIntro}"></span>
+          </td>
+          <td>
+            <a class="btn" href="/login" th:text="#{btn.login}"></a>
+          </td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>

@@ -13,9 +13,20 @@ h1 {
     margin: 0;
 }
 
+h2 {
+    font-size: 1.5rem;
+}
+
 /* INDEX */
 #index {
     background: url("index_bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* ERROR */
+#error {
+    background: url("error_bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }

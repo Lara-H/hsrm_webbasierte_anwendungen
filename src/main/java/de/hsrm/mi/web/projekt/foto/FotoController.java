@@ -85,17 +85,22 @@ public class FotoController {
     }
 
     @PostMapping("/foto/{id}/kommentar")
-    public String postKommentare(Model m, @PathVariable Long id, @RequestParam("kommentar") String kommentarText) {
+    public String postKommentare(Model m, @PathVariable Long id, @RequestParam("kommentar") String kommentarText, Principal prinz) {
         
         Object o = m.getAttribute("loggedinusername");
+        String usernamePrinz = prinz.getName();
 
         if (o != null) {
         String username = (String) o;
             logger.info("username={}", username);
             if (!username.equals("")) {
                 fotoservice.fotoKommentieren(id, username, kommentarText);
+            } else {
+                fotoservice.fotoKommentieren(id, usernamePrinz, kommentarText);
             }
-        }
+        } else {
+            fotoservice.fotoKommentieren(id, usernamePrinz, kommentarText);
+        } 
         
         return "redirect:/foto/" + id + "/kommentar";
     }

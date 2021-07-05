@@ -43,4 +43,9 @@ public class FotoRestController {
         fotoservice.fotoKommentarLoeschen(id, kid);
     }
 
+    @GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+    public Foto getFotoID(@PathVariable long id) throws JSONException{
+        return fotoservice.fotoAbfragenNachId(id).get();
+    }
+
 }
