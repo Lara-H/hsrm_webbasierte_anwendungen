@@ -13,7 +13,7 @@ const stompclient = new Client({ brokerURL: wsurl })
 
 export function useFotoStore(){
     stompclient.onConnect = (frame) => {
-    console.log("onConnect")
+    console.log("Verbunden")
     // Callback: erfolgreicher Verbindugsaufbau zu Broker
     stompclient.subscribe(DEST, (message) => {
     // Callback: Nachricht auf DEST empfangen
@@ -23,14 +23,14 @@ export function useFotoStore(){
         console.log("Nachricht eingegangen", message.body)
         console.log("Nachricht", parsedMessage.operation)
         if (parsedMessage.operation == "fotoGespeichert" || parsedMessage.operation == "fotoGeloescht") {
-             console.log("Foto geupdatet")
+            console.log("Fotoaenderung empfangen")
              updateFotos()
         }
     });
     };
-    stompclient.onDisconnect = () => { console.log("Verbindung abgebaut") /* Verbindung abgebaut*/ }
-    stompclient.onStompError = () => { console.log("Stomp Error") /* Verbindung abgebaut*/ }
-    stompclient.onWebSocketClose = () => { console.log("WebSocket") /* Verbindung abgebaut*/ }
+    stompclient.onDisconnect = () => { console.log("Verbindung abgebaut (onDisconnect)") }
+    stompclient.onStompError = () => { console.log("Verbindung abgebaut (StompError)") }
+    stompclient.onWebSocketClose = () => { console.log("Verbindung abgebaut (WebSocketClose)") }
     // Verbindung zum Broker aufbauen
     stompclient.activate();
 
@@ -38,14 +38,16 @@ export function useFotoStore(){
         fetch('api/foto/'+id, { method: 'DELETE'}
         ).then( (response) => { if (!response.ok) {
             fotostate.errormessage = "Löschen fehlgeschlagen";
+            console.log(fotostate.errormessage);
             throw new Error('schade'); 
             }
             return response.json(); 
         }
         ).then(jsondata =>{
             fotostate.fotos = jsondata
+            fotostate.errormessage = ""
         }).catch(fehler => {
-            fotostate.errormessage = 'Das hat nicht funktioniert: ' + fehler})
+            fotostate.errormessage = fotostate.errormessage + ' (' + fehler + ")"})
     }
 
     async function updateFotos() {
@@ -57,6 +59,7 @@ export function useFotoStore(){
         .then( (response) => {
             if (!response.ok) {
                 fotostate.errormessage = "Update fehlgeschlagen";
+                console.log(fotostate.errormessage);
             throw new Error('schade');
         }
             // empfangene Payload -> JSON
@@ -68,7 +71,7 @@ export function useFotoStore(){
 
         })
         .catch( (fehler) => {
-            fotostate.errormessage = 'DU bist ein Fehler: {$fehler}'})
+            fotostate.errormessage = fotostate.errormessage + ' (' + fehler + ")"})
     }
 
     return {

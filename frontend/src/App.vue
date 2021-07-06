@@ -3,9 +3,9 @@
     <div class="hero is-primary">
       <div class="hero-body">
         <h1 class="title">MI Foto Community</h1>
+        <p>Angemeldet als: {{loginstate.username}}</p>
       </div>
     </div>
-
     <div class="block">
       <nav class="navbar">
         <div class="navbar-menu is-active">
@@ -14,12 +14,11 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <a href="/logout" class="navbar-item">Logout</a>
+            <router-link to="/Login/Logout" class="navbar-item">Login/Logout</router-link>
           </div>
         </div>
       </nav>
     </div>
-
     <div class="block">
       <div class="container">
           <router-view />
@@ -29,11 +28,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import { useLoginStore } from "@/services/LoginStore";
 
 export default defineComponent({
   name: "App",
-  components: {
-  }
+  components: {},
+  setup(props) {
+    const username = ref("");
+    const password = ref("");
+    const { loginstate, doLogout, doLogin } = useLoginStore();
+    return { loginstate, doLogin, username, password };
+  },
 });
 </script>

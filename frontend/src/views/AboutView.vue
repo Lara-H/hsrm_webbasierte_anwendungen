@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1 class="title">Willkommen bei der Foto Community</h1>
-    <div class="section">
+    <div class="block">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. At ab doloremque,
       dolor aspernatur fugiat rem ea. Quae quidem obcaecati ad voluptatibus
       recusandae animi adipisci voluptas quas beatae. Nisi, tenetur error. Lorem
