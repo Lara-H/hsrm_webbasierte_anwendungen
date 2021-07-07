@@ -60,7 +60,7 @@ export function useFotoStore(){
             if (!response.ok) {
                 fotostate.errormessage = "Update fehlgeschlagen";
                 console.log(fotostate.errormessage);
-            throw new Error('schade');
+            throw new Error(response.statusText);
         }
             // empfangene Payload -> JSON
             return response.json();

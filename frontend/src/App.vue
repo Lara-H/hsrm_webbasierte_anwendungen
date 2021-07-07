@@ -14,7 +14,7 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <router-link to="/Login/Logout" class="navbar-item">Login/Logout</router-link>
+            <router-link to="/login" class="navbar-item">Login/Logout</router-link>
           </div>
         </div>
       </nav>

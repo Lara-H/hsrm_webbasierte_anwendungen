@@ -24,28 +24,27 @@ export function useLoginStore(){
     }
 
     async function doLogin(username : string, password : string) : Promise<boolean>  {
-        const userobj = { name : username , password : password};
+        const userobj = { username : username , password : password};
+        console.log(JSON.stringify(userobj))
 
         // URL-Pfad auf selbem Server, von dem der Frontend-Code kam
         const response = await fetch('/api/login', {
             method: 'POST',
             headers: {
-                'Authorization' : 'Basic ' + credetials,
                 'Content-Type' : 'application/json',
             },
             // body: POST Request-Body, dazu
             // JSON-Objekt in String-Darstellung umformen
             body: JSON.stringify(userobj),
         })
-
-        const jsondata = await response.json()
-
+        console.log(response.statusText)
         if (response.ok) {
+            const responseText = await response.text();
             loginstate.username = username;
-            loginstate.jwttoken = jsondata;
+            loginstate.jwttoken = responseText;
             loginstate.errormessage = ("");
             loginstate.isLoggedIn = true;
-            console.log("Login erfolgreich")
+            console.log("Login erfolgreich" + JSON.stringify(loginstate))
         } else {
             doLogout();
             loginstate.errormessage = ("Login fehlgeschlagen");

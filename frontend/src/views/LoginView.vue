@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div v-if="loginstate.errormessage != ''" class="notification is-danger">
-      {{ losinstate.errormessage }}
+      {{ loginstate.errormessage }}
     </div>
     <h1 class="title">Login</h1>
-    <form>
+    <div>
       <div class="field">
         <label class="label">Nutzername</label>
         <div class="control has-icons-left">
@@ -34,15 +34,16 @@
         </div>
       </div>
       <div class="control">
-        <button class="button is-primary" type="submit">Anmelden</button>
+        <button v-on:click="login()" class="button is-primary">Anmelden</button>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useLoginStore } from "@/services/LoginStore";
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: "LoginView",
@@ -50,9 +51,21 @@ export default defineComponent({
     const username = ref("");
     const password = ref("");
     const { loginstate, doLogout, doLogin } = useLoginStore();
+    const router = useRouter();
     doLogout();
 
-    return { loginstate, doLogin, username, password };
+    async function login() {
+      console.log(JSON.stringify(loginstate))
+      if (!loginstate.isLoggedIn) {
+        if (await doLogin(username.value, password.value)) {
+          router.replace("/");
+        }
+      } else {
+        doLogout();
+      }
+    }
+
+    return { loginstate, doLogin, username, password, login };
   },
 });
 </script>

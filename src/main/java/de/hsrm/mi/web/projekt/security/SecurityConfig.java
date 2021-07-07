@@ -91,7 +91,6 @@ public class SecurityConfig {
             authmanagerbuilder.userDetailsService(fotoUserDetailsService).passwordEncoder(pwenc);
         }
 
-
         @Override
         protected void configure(HttpSecurity http) throws Exception {
                 http.authorizeRequests()
