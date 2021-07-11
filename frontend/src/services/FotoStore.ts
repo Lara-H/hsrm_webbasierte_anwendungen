@@ -2,6 +2,7 @@ import { reactive, readonly } from "vue";
 import { Foto } from './Foto';
 import { Client, Message } from '@stomp/stompjs';
 import { FotoMessage } from "./FotoMesssage";
+import { useLoginStore } from "@/services/LoginStore";
 
 const fotostate = reactive({
     fotos: Array<Foto>(),
@@ -10,6 +11,7 @@ const fotostate = reactive({
 const wsurl = "ws://localhost:9090/messagebroker";
 const DEST = "/topic/foto";
 const stompclient = new Client({ brokerURL: wsurl })
+const { loginstate, doLogout, doLogin } = useLoginStore();
 
 export function useFotoStore(){
     stompclient.onConnect = (frame) => {
@@ -35,7 +37,12 @@ export function useFotoStore(){
     stompclient.activate();
 
     async function deleteFotos(id: number) {
-        fetch('api/foto/'+id, { method: 'DELETE'}
+        fetch('api/foto/'+id, { 
+            method: 'DELETE',
+            headers: {
+                'Authorization' : 'Bearer ' + loginstate.jwttoken
+            }
+        }
         ).then( (response) => { if (!response.ok) {
             fotostate.errormessage = "Löschen fehlgeschlagen";
             console.log(fotostate.errormessage);
@@ -54,6 +61,7 @@ export function useFotoStore(){
             fetch('/api/foto', {
                 method: 'GET',
                 headers: {
+                    'Authorization' : 'Bearer ' + loginstate.jwttoken
             },  
         })
         .then( (response) => {

@@ -78,6 +78,7 @@ public class FotoController {
     public String getKommentare(Model m, @PathVariable Long id, @ModelAttribute("kommentare") List<Kommentar> kommentare) {
         m.addAttribute("foto", fotoservice.fotoAbfragenNachId(id).get());
         m.addAttribute("kommentare", fotoservice.fotoAbfragenNachId(id).get().getKommentare());
+
         if (id != null) {
             return "foto/kommentare";
         }

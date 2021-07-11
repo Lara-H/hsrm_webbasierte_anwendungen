@@ -37,9 +37,9 @@
       width="400"
       height="auto"
     />
+    <p th:text="${session.loggedinusername != null}"</p>
+    <div th:if="${session.loggedinusername != null}" >
     <form
-      th:if="${loggedinusername != null}" 
-      action="#"
       th:action="@{/foto/{id}/kommentar(id=${foto.id})}"
       th:method="post"
       enctype="multipart/form-data"
@@ -48,6 +48,7 @@
       <input type="text" name="kommentar" /><br />
       <button class="btn" type="submit" th:text="${btn.senden}"></button>
     </form>
+    </div>
 
     <table class="table">
       <thead>
